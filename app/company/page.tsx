@@ -1,4 +1,4 @@
-import { CompanyDetail, CompanyImage } from "@/types/company";
+import { CompanyImage } from "@/types/company";
 import CompanyDetailTable from "@/app/components/CompanyDetailTable";
 
 async function getCompanyImage() {
@@ -12,7 +12,7 @@ export default async function History() {
   const { imageUrl, description } = companyImage;
 
   return (
-    <div className="flex h-screen flex-col gap-20 p-4">
+    <div className="flex h-screen flex-col gap-20 p-20">
       <h1 className="text-center text-3xl font-semibold">회사 소개</h1>
       <div>
         <p>{imageUrl}</p>

@@ -19,3 +19,15 @@ export interface CompanyDetail {
   scale: string;
   mainClient: string;
 }
+
+export interface CompanyAddress {
+  id: number;
+  address: string;
+  phone: string;
+  fax: string;
+  email: string;
+  subway: string;
+  bus: string;
+  walk: string;
+  car: string;
+}
