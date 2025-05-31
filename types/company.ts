@@ -5,3 +5,8 @@ export interface Histories {
   imageUrl1: string;
   imageUrl2: string;
 }
+
+export interface CompanyImage {
+  imageUrl: number;
+  description: string;
+}
