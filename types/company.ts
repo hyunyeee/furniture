@@ -10,3 +10,12 @@ export interface CompanyImage {
   imageUrl: number;
   description: string;
 }
+
+export interface CompanyDetail {
+  companyName: string;
+  ceo: string;
+  establishmentDate: string;
+  businessArea: string;
+  scale: string;
+  mainClient: string;
+}

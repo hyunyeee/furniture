@@ -1,21 +1,24 @@
-import { CompanyImage } from "@/types/company";
+import { CompanyDetail, CompanyImage } from "@/types/company";
+import CompanyDetailTable from "@/app/components/CompanyDetailTable";
 
-async function getCompany() {
+async function getCompanyImage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
   const response = await fetch(`${apiUrl}/company/image`);
   return await response.json();
 }
 
 export default async function History() {
-  const companyImage: CompanyImage = await getCompany();
+  const companyImage: CompanyImage = await getCompanyImage();
+  const { imageUrl, description } = companyImage;
 
   return (
     <div className="flex h-screen flex-col gap-20 p-4">
       <h1 className="text-center text-3xl font-semibold">회사 소개</h1>
       <div>
-        <p>{companyImage.imageUrl}</p>
-        <p>{companyImage.description}</p>
+        <p>{imageUrl}</p>
+        <p>{description}</p>
       </div>
+      <CompanyDetailTable />
     </div>
   );
 }

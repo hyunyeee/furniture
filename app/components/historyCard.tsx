@@ -1,11 +1,11 @@
-import { Company } from "@/types/company";
+import { Histories } from "@/types/company";
 
 export default function HistoryCard({
   title,
   content,
   imageUrl1,
   imageUrl2,
-}: Company) {
+}: Histories) {
   return (
     <div className="border-1 border-gray-700 p-4">
       <h2 className="font-semibold">{title}</h2>
