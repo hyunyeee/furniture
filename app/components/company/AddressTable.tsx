@@ -6,7 +6,7 @@ async function getCompanyAddress() {
   return await response.json();
 }
 
-export default async function CompanyDetailTable() {
+export default async function CompanyAddressTable() {
   const companyAddress: CompanyAddress = await getCompanyAddress();
   const { address, phone, fax, email, subway, bus, walk, car } = companyAddress;
 

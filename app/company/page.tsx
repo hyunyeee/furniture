@@ -1,5 +1,5 @@
 import { CompanyImage } from "@/types/company";
-import CompanyDetailTable from "@/app/components/CompanyDetailTable";
+import DetailTable from "@/app/components/company/DetailTable";
 
 async function getCompanyImage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
@@ -18,7 +18,7 @@ export default async function History() {
         <p>{imageUrl}</p>
         <p>{description}</p>
       </div>
-      <CompanyDetailTable />
+      <DetailTable />
     </div>
   );
 }
