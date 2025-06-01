@@ -2,6 +2,7 @@ export type InputField = {
   name: string;
   type: "text" | "number" | "email" | "password";
   placeholder: string;
+  autoFocus?: boolean;
 };
 
 export const loginFields: InputField[] = [

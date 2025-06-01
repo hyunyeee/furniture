@@ -29,18 +29,19 @@ export default function Signup() {
       title="회원가입"
       footer={{ label: "로그인 하기", href: "/login" }}
     >
-      <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
         <ToggleSwitch
           isCorporation={isCorporation}
           setIsCorporationAction={toggleCorporation}
         />
         <div className="flex flex-col gap-3">
-          {signupField.map((input) => (
+          {signupField.map(({ name, type, placeholder }, index) => (
             <Input
-              key={input.name}
-              name={input.name}
-              type={input.type}
-              placeholder={input.placeholder}
+              autoFocus={index === 0}
+              key={name}
+              name={name}
+              type={type}
+              placeholder={placeholder}
             />
           ))}
         </div>

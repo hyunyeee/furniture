@@ -16,12 +16,13 @@ export default function Login() {
     >
       <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
-          {loginFields.map((input) => (
+          {loginFields.map(({ name, type, placeholder }, index) => (
             <Input
-              key={input.name}
-              name={input.name}
-              type={input.type}
-              placeholder={input.placeholder}
+              autoFocus={index === 0}
+              key={name}
+              name={name}
+              type={type}
+              placeholder={placeholder}
             />
           ))}
         </div>
