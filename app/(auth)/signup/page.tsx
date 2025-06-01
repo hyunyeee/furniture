@@ -8,6 +8,7 @@ import {
   personalSignupFields,
 } from "@/app/(auth)/field";
 import Input from "@/app/components/auth/Input";
+import InputWithBtn from "@/app/components/auth/InputWithBtn";
 
 export default function Signup() {
   const [isCorporation, setIsCorporation] = useState(false);
@@ -29,20 +30,30 @@ export default function Signup() {
       title="회원가입"
       footer={{ label: "로그인 하기", href: "/login" }}
     >
-      <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
         <ToggleSwitch
           isCorporation={isCorporation}
           setIsCorporationAction={toggleCorporation}
         />
         <div className="flex flex-col gap-3">
-          {signupField.map(({ name, type, placeholder }, index) => (
-            <Input
-              autoFocus={index === 0}
-              key={name}
-              name={name}
-              type={type}
-              placeholder={placeholder}
-            />
+          {signupField.map(({ name, type, placeholder, button }, index) => (
+            <div key={name}>
+              {button ? (
+                <InputWithBtn
+                  name={name}
+                  type={type}
+                  placeholder={placeholder}
+                  button={button}
+                />
+              ) : (
+                <Input
+                  autoFocus={index === 0}
+                  name={name}
+                  type={type}
+                  placeholder={placeholder}
+                />
+              )}
+            </div>
           ))}
         </div>
         <button className="bg-btn-green w-full cursor-pointer rounded-xl p-4 text-white">

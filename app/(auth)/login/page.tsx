@@ -14,8 +14,11 @@ export default function Login() {
       title="로그인"
       footer={{ label: "아직 계정이 없으신가요?", href: "/signup" }}
     >
-      <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4">
+      <form
+        className="flex flex-col items-center gap-10"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex w-full flex-col gap-4">
           {loginFields.map(({ name, type, placeholder }, index) => (
             <Input
               autoFocus={index === 0}
@@ -26,7 +29,7 @@ export default function Login() {
             />
           ))}
         </div>
-        <button className="bg-btn-green w-full cursor-pointer rounded-xl p-4 text-white">
+        <button className="bg-btn-green w-full max-w-[450px] cursor-pointer rounded-xl p-4 text-white">
           로그인
         </button>
       </form>
