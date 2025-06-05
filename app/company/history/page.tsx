@@ -11,7 +11,7 @@ export default async function History() {
   const histories: Histories[] = await getHistories();
 
   return (
-    <div className="flex h-screen flex-col justify-between p-20">
+    <div className="mt-[100px] flex h-screen flex-col justify-between px-20 pb-20">
       <h1 className="text-center text-3xl font-semibold">연혁</h1>
       {histories.map(({ id, title, content, imageUrl1, imageUrl2 }) => (
         <HistoryCard
