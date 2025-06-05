@@ -1,12 +1,24 @@
 "use client";
 
+import useLogin, { LoginData } from "@/app/hooks/login";
 import FormCard from "@/app/components/auth/FormCard";
 import Input from "@/app/components/auth/Input";
 import { loginFields } from "@/app/(auth)/field";
 
 export default function Login() {
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const { login } = useLogin();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const loginData: LoginData = {
+      memberEmail: formData.get("memberEmail") as string,
+      memberPassword: formData.get("memberPassword") as string,
+    };
+
+    const result = await login(loginData);
   }
 
   return (
