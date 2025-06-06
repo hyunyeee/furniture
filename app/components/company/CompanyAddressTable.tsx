@@ -1,7 +1,7 @@
 import { CompanyAddress } from "@/types/company";
 
 async function getCompanyAddress() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+  const apiUrl = process.env.API_URL as string;
   const response = await fetch(`${apiUrl}/address/1`);
   return await response.json();
 }
