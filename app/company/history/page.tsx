@@ -2,7 +2,7 @@ import HistoryCard from "@/app/components/company/historyCard";
 import { Histories } from "@/types/company";
 
 async function getHistories(): Promise<Histories[]> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+  const apiUrl = process.env.API_URL as string;
   const response = await fetch(`${apiUrl}/company/history`);
 
   if (!response.ok) {
