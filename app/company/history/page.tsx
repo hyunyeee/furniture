@@ -1,4 +1,4 @@
-import HistoryCard from "@/app/components/historyCard";
+import HistoryCard from "@/app/components/company/historyCard";
 import { Histories } from "@/types/company";
 
 async function getHistories() {

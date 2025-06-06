@@ -1,9 +1,10 @@
 import { CompanyImage } from "@/types/company";
-import CompanyDetailTable from "@/app/components/CompanyDetailTable";
+import CompanyDetailTable from "@/app/components/company/CompanyDetailTable";
 
 async function getCompanyImage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
   const response = await fetch(`${apiUrl}/company/image`);
+
   return await response.json();
 }
 
