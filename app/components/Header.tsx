@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { navItems } from "@/app/constants/navItems";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -15,8 +16,9 @@ const Header = () => {
     <div className="fixed top-0 left-0 w-full bg-white">
       <div className="relative flex items-start justify-between px-10 py-4">
         <Link href="/">
-          <img
-            className="w-[160px]"
+          <Image
+            width={160}
+            height={50}
             src="/header_logo.png"
             alt="대명산업 로고"
           />

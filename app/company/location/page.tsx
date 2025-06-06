@@ -1,5 +1,5 @@
-import CompanyAddressTable from "@/app/components/company/AddressTable";
+import CompanyDetailTable from "@/app/components/company/CompanyAddressTable";
 
 export default function CompanyLocation() {
-  return <CompanyAddressTable />;
+  return <CompanyDetailTable />;
 }
