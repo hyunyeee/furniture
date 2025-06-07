@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { navItems } from "@/app/constants/navItems";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getNickNameFromLocalStorage } from "@/app/utils/storage";
+import { navItems } from "@/app/constants/navItems";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [loginMsg, setLoginMsg] = useState("로그인");
 
-  const isLoggedIn = true;
-  const userName = "UserName";
-  const loginMsg = isLoggedIn ? userName + "님 안녕하세요!" : "로그인";
+  useEffect(() => {
+    const nickname = getNickNameFromLocalStorage();
+    if (nickname) {
+      setLoginMsg(`${nickname}님 안녕하세요!`);
+    }
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full bg-white">

@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export interface LoginData {
   memberEmail: string;
@@ -7,8 +10,11 @@ export interface LoginData {
 
 interface LoginResult {
   success: boolean;
-  token?: string;
-  error?: string;
+  token: string;
+  memberId: number;
+  memberName: string;
+  memberNickName: string;
+  checkCorporation: boolean;
 }
 
 function saveTokenToSession(token: string) {
@@ -20,6 +26,7 @@ function saveTokenToSession(token: string) {
 }
 
 const useLogin = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,8 +35,6 @@ const useLogin = () => {
     setError(null);
 
     try {
-      console.log(params);
-
       const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       if (!baseUrl) throw new Error("API 주소가 설정되지 않았습니다.");
 
@@ -51,11 +56,27 @@ const useLogin = () => {
       setLoading(false);
       saveTokenToSession(data.token);
 
-      return { success: true, token: data.token };
-    } catch (err: any) {
+      const { token, memberId, memberName, memberNickName, checkCorporation } =
+        data;
+
+      router.push("/");
+
+      return {
+        success: true,
+        token,
+        memberId,
+        memberName,
+        memberNickName,
+        checkCorporation,
+      };
+    } catch (err: unknown) {
+      let message = "알 수 없는 오류가 발생했습니다.";
+      if (err instanceof Error) {
+        message = err.message;
+      }
       setLoading(false);
-      setError(err.message);
-      return { success: false, error: err.message };
+      setError(message);
+      throw new Error(message);
     }
   };
 
