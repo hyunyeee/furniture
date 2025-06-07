@@ -7,19 +7,22 @@ export type InputField = {
 };
 
 export const loginFields: InputField[] = [
-  { name: "email", type: "email", placeholder: "이메일" },
-  { name: "password", type: "password", placeholder: "비밀번호" },
+  { name: "memberEmail", type: "email", placeholder: "이메일" },
+  { name: "memberPassword", type: "password", placeholder: "비밀번호" },
 ];
+
+export const AUTH_SEND = "인증";
+export const AUTH_VERIFY = "확인";
 
 export const personalSignupFields: InputField[] = [
   { name: "name", type: "text", placeholder: "이름" },
   { name: "nickname", type: "text", placeholder: "닉네임" },
-  { name: "email", type: "email", placeholder: "이메일", button: "인증" },
+  { name: "email", type: "email", placeholder: "이메일", button: AUTH_SEND },
   {
-    name: "verify",
+    name: "authCode",
     type: "text",
     placeholder: "인증번호",
-    button: "확인",
+    button: AUTH_VERIFY,
   },
   { name: "password", type: "password", placeholder: "비밀번호" },
   { name: "roadAddress", type: "text", placeholder: "도로명 주소" },
