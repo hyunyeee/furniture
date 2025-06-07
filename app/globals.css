@@ -1,2 +1,8 @@
 @import "tailwindcss";
 /*@plugin "@tailwindcss/forms";*/
+
+@theme {
+  --color-page-green: #f9f8f5;
+  --color-input-green: #dce2d8;
+  --color-btn-green: #698b6b;
+}
