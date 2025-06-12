@@ -1,21 +1,56 @@
 "use client";
 
 import Image from "next/image";
-import { CategoryProduct } from "@/types/products";
+import AddCart from "@/app/components/product/AddCart";
+import SpecTable from "@/app/components/product/SpecTable";
+import { CategoryProduct, productSpec } from "@/types/products";
 
-const ProductDetailClient = ({ product }: { product: CategoryProduct }) => {
-  const { name, description, price, image } = product;
+interface DetailPageProps {
+  product: CategoryProduct;
+  productSpec: productSpec[];
+}
+
+const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
+  const { id, name, description, price, image } = product;
+
   return (
-    <div className="flex justify-center">
-      <div className="my-[100px] p-4">
-        {image ? (
-          <Image width={400} height={400} src={image} alt="상품 이미지 " />
-        ) : (
-          <div className="bg-gray-100">이미지</div>
-        )}
-        <h1 className="font-semibold">{name}</h1>
-        <p>{description}</p>
-        <p>{price}원</p>
+    <div className="mx-auto mt-20 px-4 py-8 md:mt-[100px]">
+      <div className="flex flex-col items-center justify-center lg:flex-row lg:items-center lg:gap-20">
+        <div className="flex flex-col">
+          <div className="relative my-auto h-[300px] w-full max-w-[400px] flex-shrink-0 overflow-hidden rounded-lg md:h-[400px] md:w-[400px]">
+            {image ? (
+              <Image
+                src={image}
+                alt={name || "상품 이미지"}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-500">
+                이미지 없음
+              </div>
+            )}
+          </div>
+          {productSpec.length > 0 && <SpecTable productSpec={productSpec} />}
+        </div>
+
+        <div>
+          <div className="p-3 lg:flex-grow">
+            <div className="flex">
+              <div className="flex-grow whitespace-nowrap">
+                <h1 className="mb-2 pt-6 text-3xl font-bold text-gray-800 md:text-2xl">
+                  {name}
+                </h1>
+                <p className="mb-4 text-lg text-gray-600">{description}</p>
+                <p className="mb-6 text-xl font-extrabold text-green-700">
+                  {price.toLocaleString()}원
+                </p>
+              </div>
+            </div>
+
+            <AddCart itemId={id} />
+          </div>
+        </div>
       </div>
     </div>
   );
