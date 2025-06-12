@@ -4,10 +4,15 @@ export interface Category {
 }
 
 export interface CategoryProduct {
-  id?: number;
+  id: number;
   name: string;
   description: string;
   price: number;
   categoryName: string;
   image: string | null;
+}
+
+export interface productSpec {
+  model: string;
+  size: string;
 }
