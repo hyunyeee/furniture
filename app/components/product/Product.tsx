@@ -31,7 +31,7 @@ const Product = ({
       </div>
 
       <p>{description}</p>
-      <p className="font-semibold">{price}</p>
+      <p className="font-semibold">{price.toLocaleString()}</p>
     </Link>
   );
 };
