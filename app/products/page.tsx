@@ -1,6 +1,6 @@
 import CategoryButton from "@/app/components/product/CategoryButton";
 import { Category } from "@/types/products";
-import { getCategories } from "@/lib/api/products";
+import { getCategories } from "@/lib/api/product";
 import ProductList from "@/app/components/product/ProductList";
 
 export default async function Products() {

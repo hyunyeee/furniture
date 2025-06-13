@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import useCategoryStore from "@/app/store/useCategoryStore";
-import { getCategoryProductsById } from "@/lib/api/products";
+import Product from "@/app/components/product/Product";
+import { getCategoryProductsById } from "@/lib/api/product";
 import { CategoryProduct } from "@/types/products";
-import Product from "@/app/products/Product";
 
 interface ProductListProps {
   initialCategoryId: number;
@@ -24,7 +24,6 @@ export default function ProductList({ initialCategoryId }: ProductListProps) {
   useEffect(() => {
     if (!categoryId) return;
 
-    console.log(initialCategoryId);
     const fetchProducts = async () => {
       setLoading(true);
       try {
