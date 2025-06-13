@@ -39,7 +39,7 @@ const Cart = () => {
     };
 
     fetchCartList();
-  }, [isHydrated, token]);
+  }, [token]);
 
   const handleQuantityChange = async (
     cartItemId: number,
@@ -67,7 +67,7 @@ const Cart = () => {
       );
       await deleteCartItem([productId]);
       alert(`장바구니 항목 ID ${productId} 삭제됨`);
-    } catch (e: any) {
+    } catch (e: unknown) {
       alert("상품 삭제를 실패했습니다.");
     }
   };
