@@ -26,8 +26,10 @@ const QuantitySelector = ({
       setLocalQuantity(newQuantity);
       onQuantityChange(itemId, newQuantity);
       await increaseCartItem(itemId);
-    } catch (e: unknown) {
-      alert("상품 수량 수정을 실패했습니다.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("상품 수량 수정을 실패했습니다.");
+      }
     }
   };
 
@@ -39,8 +41,10 @@ const QuantitySelector = ({
         onQuantityChange(itemId, newQuantity);
         await decreaseCartItem(itemId);
       }
-    } catch (e: unknown) {
-      alert("상품 수량 수정을 실패했습니다.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("상품 수량 수정을 실패했습니다.");
+      }
     }
   };
 
@@ -57,8 +61,10 @@ const QuantitySelector = ({
         onQuantityChange(itemId, localQuantity);
         await updateCartItem(itemId, localQuantity);
       }
-    } catch (e: unknown) {
-      alert("상품 수량 수정을 실패했습니다.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("상품 수량 수정을 실패했습니다.");
+      }
     }
   };
 

@@ -31,15 +31,19 @@ const Cart = () => {
       try {
         const data = await getCartList();
         setCartList(data.items);
-      } catch (err: any) {
-        setError(err.message || "장바구니 정보를 불러오는 데 실패했습니다.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("장바구니 정보를 불러오는 데 실패했습니다.");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchCartList();
-  }, [token]);
+  }, [isHydrated, token]);
 
   const handleQuantityChange = async (
     cartItemId: number,
@@ -67,8 +71,10 @@ const Cart = () => {
       );
       await deleteCartItem([productId]);
       alert(`장바구니 항목 ID ${productId} 삭제됨`);
-    } catch (e: unknown) {
-      alert("상품 삭제를 실패했습니다.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("상품 삭제를 실패했습니다.");
+      }
     }
   };
 

@@ -31,8 +31,10 @@ const AddCart = ({ itemId }: AddCartProps) => {
       await addCartItem(itemId, quantity);
       router.push("/cart");
       alert(`장바구니에 ${itemId} 상품 ${quantity}개 추가했습니다`);
-    } catch (e: unknown) {
-      alert("장바구니에 상품 추가를 실패했습니다.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("장바구니에 상품 추가를 실패했습니다.");
+      }
     }
   };
 
