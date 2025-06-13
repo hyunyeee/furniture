@@ -1,7 +1,10 @@
-import Link from "next/link";
+"use client";
+
 import { useState } from "react";
-import { addCartItem } from "@/lib/api/cart";
+import { useCartApi } from "@/lib/api/cart";
 import ProductQuantitySelector from "@/app/components/cart/ProductQuantitySelector";
+import { useAuthStore } from "@/app/store/authStore";
+import { useRouter } from "next/navigation";
 
 interface AddCartProps {
   itemId: number;
@@ -9,15 +12,28 @@ interface AddCartProps {
 
 const AddCart = ({ itemId }: AddCartProps) => {
   const [quantity, setQuantity] = useState(1);
+  const { token } = useAuthStore();
+  const router = useRouter();
+
+  const { addCartItem } = useCartApi(token || "");
 
   const handleQuantityChange = async (newQuantity: number) => {
     setQuantity(newQuantity);
   };
 
   const addCart = async (itemId: number, quantity: number) => {
-    await addCartItem(itemId, quantity);
-
-    alert(`장바구니에 ${itemId} 상품 ${quantity}개 추가했습니다`);
+    try {
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        router.push("/login");
+        return;
+      }
+      await addCartItem(itemId, quantity);
+      router.push("/cart");
+      alert(`장바구니에 ${itemId} 상품 ${quantity}개 추가했습니다`);
+    } catch (e: any) {
+      alert("장바구니에 상품 추가를 실패했습니다.");
+    }
   };
 
   return (
@@ -70,13 +86,12 @@ const AddCart = ({ itemId }: AddCartProps) => {
         </div>
       </div>
 
-      <Link
-        href="/cart"
+      <button
         className="focus:ring-opacity-50 w-full max-w-sm cursor-pointer rounded-xl bg-[#698b6b] p-4 text-center text-lg font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#5a7a5c] focus:ring-2 focus:ring-[#698b6b] focus:outline-none"
         onClick={() => addCart(itemId, quantity)}
       >
         장바구니에 담기
-      </Link>
+      </button>
     </div>
   );
 };
