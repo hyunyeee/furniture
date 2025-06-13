@@ -1,102 +1,59 @@
 import { CartProductListInfo } from "@/types/products";
+import { useAuthenticatedFetch } from "@/app/hooks/useAuthenticatedFetch";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const token = "token";
 
-export const getCartList = async (): Promise<CartProductListInfo> => {
-  const response = await fetch(`${apiUrl}/cart`, {
-    cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-  });
-  if (!response.ok) throw new Error("장바구니 목록 불러오기 실패");
-  return await response.json();
-};
+export const useCartApi = (token: string) => {
+  const authFetch = useAuthenticatedFetch(token);
 
-export const addCartItem = async (
-  productId: number,
-  quantity: number,
-): Promise<void> => {
-  const response = await fetch(`${apiUrl}/cart/add`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    body: JSON.stringify({ productId, quantity }),
-  });
+  const getCartList = async (): Promise<CartProductListInfo> => {
+    const res = await authFetch(`${apiUrl}/cart`, {
+      cache: "no-store",
+    });
+    return await res.json();
+  };
 
-  if (!response.ok) {
-    console.error(response);
-    throw new Error("장바구니 수량 변경 실패");
-  }
-};
+  const addCartItem = async (productId: number, quantity: number) => {
+    await authFetch(`${apiUrl}/cart/add`, {
+      method: "POST",
+      body: JSON.stringify({ productId, quantity }),
+    });
+  };
 
-export const updateCartItem = async (
-  cartItemId: number,
-  quantity: number,
-): Promise<void> => {
-  const response = await fetch(`${apiUrl}/cart/update`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    body: JSON.stringify({ cartItemId, quantity }),
-  });
+  const updateCartItem = async (cartItemId: number, quantity: number) => {
+    await authFetch(`${apiUrl}/cart/update`, {
+      method: "PUT",
+      body: JSON.stringify({ cartItemId, quantity }),
+    });
+  };
 
-  if (!response.ok) {
-    console.error(response);
-    throw new Error("장바구니 수량 변경 실패");
-  }
-};
+  const increaseCartItem = async (cartItemId: number) => {
+    await authFetch(`${apiUrl}/cart/increase`, {
+      method: "POST",
+      body: JSON.stringify({ cartItemId }),
+    });
+  };
 
-export const increaseCartItem = async (cartItemId: number): Promise<void> => {
-  const response = await fetch(`${apiUrl}/cart/increase`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    body: JSON.stringify({ cartItemId }),
-  });
+  const decreaseCartItem = async (cartItemId: number) => {
+    await authFetch(`${apiUrl}/cart/decrease`, {
+      method: "POST",
+      body: JSON.stringify({ cartItemId }),
+    });
+  };
 
-  if (!response.ok) {
-    console.error(response);
-    throw new Error("장바구니 수량 증가 실패");
-  }
-};
+  const deleteCartItem = async (productIds: number[]) => {
+    await authFetch(`${apiUrl}/cart/delete`, {
+      method: "DELETE",
+      body: JSON.stringify({ productIds }),
+    });
+  };
 
-export const decreaseCartItem = async (cartItemId: number): Promise<void> => {
-  const response = await fetch(`${apiUrl}/cart/decrease`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    body: JSON.stringify({ cartItemId }),
-  });
-
-  if (!response.ok) {
-    console.error(response);
-    throw new Error("장바구니 수량 감소 실패");
-  }
-};
-
-export const deleteCartItem = async (productIds: number[]): Promise<void> => {
-  const response = await fetch(`${apiUrl}/cart/delete`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    body: JSON.stringify({ productIds }),
-  });
-
-  if (!response.ok) {
-    console.error(response);
-    throw new Error("장바구니 삭제 실패");
-  }
+  return {
+    getCartList,
+    addCartItem,
+    updateCartItem,
+    increaseCartItem,
+    decreaseCartItem,
+    deleteCartItem,
+  };
 };

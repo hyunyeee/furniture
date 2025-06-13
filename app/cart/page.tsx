@@ -2,22 +2,48 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { deleteCartItem, getCartList } from "@/lib/api/cart";
+import { useCartApi } from "@/lib/api/cart";
+import { useHydrated } from "@/app/hooks/useHydrated";
+import { useAuthStore } from "@/app/store/authStore";
 import QuantitySelector from "@/app/components/cart/QuantitySelector";
 import RemoveButton from "@/app/components/cart/RemoveButton";
 import { CartProduct } from "@/types/products";
 
 const Cart = () => {
+  const { token } = useAuthStore();
+  const isHydrated = useHydrated();
+
   const [cartList, setCartList] = useState<CartProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const { getCartList, deleteCartItem } = useCartApi(token || "");
 
   useEffect(() => {
+    if (!isHydrated || !token) {
+      return;
+    }
+
     const fetchCartList = async () => {
-      const data = await getCartList();
-      setCartList(data.items);
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await getCartList();
+        setCartList(data.items);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("장바구니 정보를 불러오는 데 실패했습니다.");
+        }
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchCartList();
-  }, []);
+  }, [isHydrated, token]);
 
   const handleQuantityChange = async (
     cartItemId: number,
@@ -39,14 +65,34 @@ const Cart = () => {
   };
 
   const handleRemoveItem = async (productId: number) => {
-    setCartList((prevCartList) =>
-      prevCartList.filter((item) => item.productId !== productId),
-    );
-    await deleteCartItem([productId]);
-    alert(`장바구니 항목 ID ${productId} 삭제됨`);
+    try {
+      setCartList((prevCartList) =>
+        prevCartList.filter((item) => item.productId !== productId),
+      );
+      await deleteCartItem([productId]);
+      alert(`장바구니 항목 ID ${productId} 삭제됨`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert("상품 삭제를 실패했습니다.");
+      }
+    }
   };
 
-  const orderTotal = cartList.reduce((acc, item) => acc + item.totalPrice, 0);
+  const orderTotal = cartList?.reduce((acc, item) => acc + item.totalPrice, 0);
+
+  if (!isHydrated || loading || error) {
+    let message = "로딩 중...";
+
+    if (error) message = error;
+    else if (!token) message = "로그인이 필요합니다";
+    else if (!isHydrated || loading) message = "장바구니 로딩 중...";
+
+    return (
+      <div className="m-40 flex h-22 items-center justify-center rounded-md bg-gray-400 text-xl text-white shadow-md">
+        {message}
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto mt-14 max-w-7xl p-6">
@@ -56,13 +102,13 @@ const Cart = () => {
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="lg:col-span-8">
-          {cartList.length === 0 ? (
+          {cartList?.length === 0 ? (
             <div className="flex h-22 items-center justify-center rounded-md bg-gray-400 text-lg text-white shadow-md">
               장바구니에 상품이 없습니다.
             </div>
           ) : (
             <ul className="space-y-4">
-              {cartList.map((item) => (
+              {cartList?.map((item) => (
                 <li
                   key={item.cartItemId}
                   className="flex items-center rounded-md border border-gray-200 bg-white p-2 shadow-sm"
@@ -117,7 +163,7 @@ const Cart = () => {
             <div className="flex justify-between pt-4 text-xl font-bold text-gray-900">
               <span>최종 결제 금액</span>
               <span>
-                {orderTotal.toLocaleString("ko-KR", {
+                {orderTotal?.toLocaleString("ko-KR", {
                   style: "currency",
                   currency: "KRW",
                   maximumFractionDigits: 0,
