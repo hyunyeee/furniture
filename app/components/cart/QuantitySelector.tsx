@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  decreaseCartItem,
-  increaseCartItem,
-  updateCartItem,
-} from "@/lib/api/cart";
+import { useCartApi } from "@/lib/api/cart";
+import { useAuthStore } from "@/app/store/authStore";
 
 interface QuantitySelectorProps {
   itemId: number;
@@ -17,20 +14,33 @@ const QuantitySelector = ({
   onQuantityChange,
 }: QuantitySelectorProps) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
+  const { token } = useAuthStore();
+
+  const { decreaseCartItem, increaseCartItem, updateCartItem } = useCartApi(
+    token || "",
+  );
 
   const handleIncrease = async () => {
-    const newQuantity = localQuantity + 1;
-    setLocalQuantity(newQuantity);
-    onQuantityChange(itemId, newQuantity);
-    await increaseCartItem(itemId);
+    try {
+      const newQuantity = localQuantity + 1;
+      setLocalQuantity(newQuantity);
+      onQuantityChange(itemId, newQuantity);
+      await increaseCartItem(itemId);
+    } catch (e: any) {
+      alert("상품 수량 수정을 실패했습니다.");
+    }
   };
 
   const handleDecrease = async () => {
-    if (localQuantity > 1) {
-      const newQuantity = localQuantity - 1;
-      setLocalQuantity(newQuantity);
-      onQuantityChange(itemId, newQuantity);
-      await decreaseCartItem(itemId);
+    try {
+      if (localQuantity > 1) {
+        const newQuantity = localQuantity - 1;
+        setLocalQuantity(newQuantity);
+        onQuantityChange(itemId, newQuantity);
+        await decreaseCartItem(itemId);
+      }
+    } catch (e: any) {
+      alert("상품 수량 수정을 실패했습니다.");
     }
   };
 
@@ -42,9 +52,13 @@ const QuantitySelector = ({
   };
 
   const handleBlur = async () => {
-    if (localQuantity !== quantity) {
-      onQuantityChange(itemId, localQuantity);
-      await updateCartItem(itemId, localQuantity);
+    try {
+      if (localQuantity !== quantity) {
+        onQuantityChange(itemId, localQuantity);
+        await updateCartItem(itemId, localQuantity);
+      }
+    } catch (e) {
+      alert("상품 수량 수정을 실패했습니다.");
     }
   };
 
