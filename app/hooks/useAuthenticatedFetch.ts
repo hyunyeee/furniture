@@ -23,7 +23,7 @@ export const useAuthenticatedFetch = (token: string) => {
       },
     });
 
-    if (res.status === 404 || !token) {
+    if (res.status === 401 || !token) {
       clearToken();
       setMemberNickName("");
       alert("로그인 상태가 유효하지 않습니다. 다시 로그인해주세요.");
