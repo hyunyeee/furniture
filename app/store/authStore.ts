@@ -15,7 +15,7 @@ export const useAuthStore = create<AuthState>()(
       clearToken: () => set({ token: null }),
     }),
     {
-      name: "auth-token",
+      name: "token",
       storage: {
         getItem: (key) => {
           const value = sessionStorage.getItem(key);

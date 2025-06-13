@@ -2,10 +2,13 @@
 
 import { useAuthStore } from "@/app/store/authStore";
 import useMemberInfoStore from "@/app/store/memberInfoStore";
+import { useRouter } from "next/navigation";
 
 export const useAuthenticatedFetch = (token: string) => {
   const { clearToken } = useAuthStore();
   const { setMemberNickName } = useMemberInfoStore();
+
+  const router = useRouter();
 
   return async (
     input: RequestInfo,
@@ -20,10 +23,12 @@ export const useAuthenticatedFetch = (token: string) => {
       },
     });
 
-    if (res.status === 401) {
+    if (res.status === 404 || !token) {
       clearToken();
       setMemberNickName("");
-      throw new Error("로그인 상태가 만료 되었습니다. 다시 로그인해주세요.");
+      alert("로그인 상태가 유효하지 않습니다. 다시 로그인해주세요.");
+      router.push("/login");
+      throw new Error("로그인 상태가 유효하지 않습니다. 다시 로그인해주세요.");
     }
 
     return res;
