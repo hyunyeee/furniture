@@ -1,7 +1,6 @@
 "use client";
 
 import useLogin, { LoginData } from "@/app/hooks/login";
-import { saveNickNameToLocalStorage } from "@/app/utils/storage";
 import FormCard from "@/app/components/auth/FormCard";
 import Input from "@/app/components/auth/Input";
 import { loginFields } from "@/app/(auth)/field";
@@ -19,8 +18,7 @@ export default function Login() {
       memberPassword: formData.get("memberPassword") as string,
     };
 
-    const result = await login(loginData);
-    saveNickNameToLocalStorage(result.memberNickName || "");
+    await login(loginData);
   }
 
   return (

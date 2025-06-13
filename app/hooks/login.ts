@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/app/store/authStore";
+import useMemberInfoStore from "@/app/store/memberInfoStore";
 
 export interface LoginData {
   memberEmail: string;
@@ -17,20 +19,14 @@ interface LoginResult {
   checkCorporation: boolean;
 }
 
-function saveTokenToSession(token: string) {
-  try {
-    sessionStorage.setItem("authToken", token);
-  } catch (error) {
-    console.error("세션스토리지에 토큰 저장 실패:", error);
-  }
-}
-
 const useLogin = () => {
   const router = useRouter();
+  const { setToken } = useAuthStore();
+  const { setMemberNickName, setCheckCorporation } = useMemberInfoStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const login = async (params: LoginData): Promise<LoginResult> => {
+  const login = async (params: LoginData): Promise<void> => {
     setLoading(true);
     setError(null);
 
@@ -51,24 +47,16 @@ const useLogin = () => {
         throw new Error(errorData.message || "로그인 실패");
       }
 
-      const data = await response.json();
+      const data: LoginResult = await response.json();
+
+      const { token, memberNickName, checkCorporation } = data;
 
       setLoading(false);
-      saveTokenToSession(data.token);
-
-      const { token, memberId, memberName, memberNickName, checkCorporation } =
-        data;
+      setToken(token);
+      setMemberNickName(memberNickName);
+      setCheckCorporation(checkCorporation);
 
       router.push("/");
-
-      return {
-        success: true,
-        token,
-        memberId,
-        memberName,
-        memberNickName,
-        checkCorporation,
-      };
     } catch (err: unknown) {
       let message = "알 수 없는 오류가 발생했습니다.";
       if (err instanceof Error) {

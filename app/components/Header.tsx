@@ -1,21 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getNickNameFromLocalStorage } from "@/app/utils/storage";
 import { navItems } from "@/app/constants/navItems";
+import useMemberInfoStore from "@/app/store/memberInfoStore";
 
 const Header = () => {
+  const { memberNickName } = useMemberInfoStore();
   const [isHovered, setIsHovered] = useState(false);
-  const [loginMsg, setLoginMsg] = useState("로그인");
-
-  useEffect(() => {
-    const nickname = getNickNameFromLocalStorage();
-    if (nickname) {
-      setLoginMsg(`${nickname}님 안녕하세요!`);
-    }
-  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full bg-white">
@@ -37,7 +30,7 @@ const Header = () => {
           <div className="flex cursor-pointer items-start justify-between gap-6">
             {navItems.map((item) => (
               <div key={item.label}>
-                <div className="w-[120px] rounded-xl px-4 py-2 text-center font-semibold whitespace-nowrap hover:bg-gray-100">
+                <div className="w-[120px] rounded-xl px-4 py-2 text-center font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-gray-100">
                   {item.label}
                 </div>
               </div>
@@ -63,10 +56,10 @@ const Header = () => {
           )}
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex items-center gap-6">
           <Link
             href="/contact"
-            className="rounded-xl bg-slate-400 px-4 py-2 whitespace-nowrap"
+            className="border-btn-green text-centerwhitespace-nowrap hover:bg-btn-green rounded-xl border-2 px-2 py-1 transition-colors duration-200 hover:text-white"
           >
             문의하기
           </Link>
@@ -74,7 +67,16 @@ const Header = () => {
             href="/login"
             className="rounded-xl px-4 py-2 whitespace-nowrap"
           >
-            {loginMsg}
+            {memberNickName ? (
+              <p>
+                <b className="text-btn-green font-extrabold">
+                  {memberNickName}
+                </b>
+                님 안녕하세요!
+              </p>
+            ) : (
+              <p>로그인</p>
+            )}
           </Link>
         </div>
       </div>

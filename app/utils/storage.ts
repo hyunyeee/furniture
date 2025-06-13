@@ -20,11 +20,3 @@ export const saveEmailToLocalStorage = (email: string) => {
 export const getEmailFromLocalStorage = (): string => {
   return getFromLocalStorage("email");
 };
-
-export const saveNickNameToLocalStorage = (nickName: string) => {
-  saveToLocalStorage("NickName", nickName);
-};
-
-export const getNickNameFromLocalStorage = (): string => {
-  return getFromLocalStorage("NickName");
-};
