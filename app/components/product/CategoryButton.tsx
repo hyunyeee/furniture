@@ -14,7 +14,7 @@ const CategoryButton = ({ id, name }: Category) => {
   return (
     <button
       onClick={handleClick}
-      className={`${categoryId === id ? "bg-primary-green text-white" : "bg-input-green"} hover:bg-dark-green cursor-pointer rounded-md px-4 py-2 transition-colors hover:text-white`}
+      className={`${categoryId === id ? "bg-primary-green text-white" : "bg-light-green"} hover:bg-dark-green cursor-pointer rounded-md px-4 py-2 transition-colors hover:text-white`}
     >
       <p>{name}</p>
     </button>

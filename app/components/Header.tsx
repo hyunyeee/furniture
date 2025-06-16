@@ -45,7 +45,7 @@ const Header = () => {
                     <Link
                       href={child.href}
                       key={child.label}
-                      className="rounded-xl p-2 text-center whitespace-nowrap hover:bg-gray-100"
+                      className="hover:bg-light-green rounded-xl p-2 text-center whitespace-nowrap"
                     >
                       {child.label}
                     </Link>

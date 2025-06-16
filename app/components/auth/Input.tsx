@@ -13,7 +13,7 @@ export default function Input({
       </label>
       <input
         autoFocus={autoFocus}
-        className="bg-input-green w-full max-w-[330px] flex-grow-0 appearance-none rounded-xl border-1 border-gray-100 px-4 py-2 whitespace-nowrap [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="bg-light-green w-full max-w-[330px] flex-grow-0 appearance-none rounded-xl border-1 border-gray-100 px-4 py-2 whitespace-nowrap [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         name={name}
         type={type}
         placeholder={placeholder}
