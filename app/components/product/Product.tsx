@@ -13,7 +13,7 @@ const Product = ({
   return (
     <Link
       href={`/products/${id}`}
-      className="rounded-xl border-1 border-gray-100 px-6 py-4"
+      className="flex w-[300px] flex-col items-center rounded-xl border-1 border-gray-100 px-6 py-4"
     >
       {image ? (
         <Image src={image} alt="상품 이미지" width={200} height={200} />
@@ -23,9 +23,9 @@ const Product = ({
         </div>
       )}
 
-      <div className="mb-4 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <p className="font-semibold">{name}</p>
-        <p className="inline rounded-md bg-slate-500 px-2 py-1 text-sm text-white">
+        <p className="bg-primary-green ml-2 inline rounded-md px-2 py-1 text-xs text-white">
           {categoryName}
         </p>
       </div>

@@ -41,7 +41,7 @@ export default function Login() {
             />
           ))}
         </div>
-        <button className="bg-btn-green w-full max-w-[450px] cursor-pointer rounded-xl p-4 text-white">
+        <button className="bg-primary-green w-full max-w-[450px] cursor-pointer rounded-xl p-4 text-white">
           로그인
         </button>
       </form>

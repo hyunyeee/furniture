@@ -11,7 +11,7 @@ const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-white">
+    <div className="fixed top-0 left-0 z-10 w-full bg-white">
       <div className="relative flex items-start justify-between px-10 py-4">
         <Link href="/">
           <Image
@@ -45,7 +45,7 @@ const Header = () => {
                     <Link
                       href={child.href}
                       key={child.label}
-                      className="rounded-xl p-2 text-center whitespace-nowrap hover:bg-gray-100"
+                      className="hover:bg-light-green rounded-xl p-2 text-center whitespace-nowrap"
                     >
                       {child.label}
                     </Link>
@@ -59,17 +59,17 @@ const Header = () => {
         <div className="flex items-center gap-6">
           <Link
             href="/contact"
-            className="border-btn-green text-centerwhitespace-nowrap hover:bg-btn-green rounded-xl border-2 px-2 py-1 transition-colors duration-200 hover:text-white"
+            className="hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
           >
             문의하기
           </Link>
           <Link
             href="/login"
-            className="rounded-xl px-4 py-2 whitespace-nowrap"
+            className="hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
           >
             {memberNickName ? (
               <p>
-                <b className="text-btn-green font-extrabold">
+                <b className="text-primary-green font-extrabold">
                   {memberNickName}
                 </b>
                 님 안녕하세요!

@@ -15,7 +15,7 @@ export const navItems = [
   {
     label: "제품소개",
     children: [
-      { label: "신제품", href: "/new" },
+      { label: "신제품", href: "/products" },
       { label: "Folding Desk", href: "/products" },
       { label: "1인용 테이블", href: "/products" },
       { label: "열린교실", href: "/products" },
@@ -26,8 +26,8 @@ export const navItems = [
     label: "소식",
     children: [
       { label: "뉴스", href: "/news" },
-      { label: "공지사항", href: "/news" },
-      { label: "홍보영상", href: "/news" },
+      { label: "공지사항", href: "/notice" },
+      { label: "홍보영상", href: "/video" },
     ],
   },
 ];

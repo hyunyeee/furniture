@@ -56,7 +56,7 @@ export default function Signup() {
             </div>
           ))}
         </div>
-        <button className="bg-btn-green w-full cursor-pointer rounded-xl p-4 text-white">
+        <button className="bg-primary-green w-full cursor-pointer rounded-xl p-4 text-white">
           회원가입
         </button>
       </form>
