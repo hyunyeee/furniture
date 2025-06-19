@@ -65,11 +65,11 @@ const Header = () => {
           </Link>
           <Link
             href="/login"
-            className="hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
+            className="group hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
           >
             {memberNickName ? (
               <p>
-                <b className="text-primary-green font-extrabold">
+                <b className="text-primary-green font-extrabold transition-colors duration-200 group-hover:text-white">
                   {memberNickName}
                 </b>
                 님 안녕하세요!
@@ -78,6 +78,16 @@ const Header = () => {
               <p>로그인</p>
             )}
           </Link>
+          {memberNickName && (
+            <Link href="/cart">
+              <Image
+                width={24}
+                height={24}
+                src="/icon/cart_icon.svg"
+                alt="장바구니 이미지"
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>
