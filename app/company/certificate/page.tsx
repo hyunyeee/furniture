@@ -24,7 +24,7 @@ export default async function CertificatePage() {
   const certificates: Certificate[] = await getCertificate();
 
   return (
-    <div className="my-[100px] flex h-screen flex-col justify-between px-20 pb-20">
+    <div className="mt-[100px] flex flex-col justify-between px-20">
       <h1 className="text-center text-3xl font-semibold">인증서</h1>
 
       {certificates.length === 0 ? (
