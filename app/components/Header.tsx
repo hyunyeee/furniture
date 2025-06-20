@@ -63,21 +63,27 @@ const Header = () => {
           >
             문의하기
           </Link>
-          <Link
-            href="/login"
-            className="group hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
-          >
-            {memberNickName ? (
+          {memberNickName ? (
+            <Link
+              href="my-page"
+              className="group hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
+            >
               <p>
                 <b className="text-primary-green font-extrabold transition-colors duration-200 group-hover:text-white">
                   {memberNickName}
                 </b>
                 님 안녕하세요!
               </p>
-            ) : (
-              <p>로그인</p>
-            )}
-          </Link>
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="group hover:bg-primary-green rounded-xl bg-gray-100 px-3 py-2 text-center whitespace-nowrap transition-colors duration-200 hover:text-white"
+            >
+              로그인
+            </Link>
+          )}
+
           {memberNickName && (
             <Link href="/cart">
               <Image
