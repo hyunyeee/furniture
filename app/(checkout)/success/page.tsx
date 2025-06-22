@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import "../../checkout.css";
 
 export default function SuccessPage() {
@@ -48,7 +49,7 @@ export default function SuccessPage() {
         console.error(error);
         router.push(`/fail?code=${error.code}&message=${error.message}`);
       });
-  }, [searchParams]);
+  }, [amount, orderId, paymentKey, router, searchParams]);
 
   if (!orderId || !amount || !paymentKey) {
     return <div>로딩 중...</div>;
@@ -57,9 +58,12 @@ export default function SuccessPage() {
   return (
     <>
       <div className="box_section" style={{ width: "600px" }}>
-        <img
-          width="100px"
+        <Image
+          className="mx-auto"
           src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png"
+          alt="성공 이미지"
+          width={100}
+          height={100}
         />
         <h2>결제를 완료했어요</h2>
         <div className="p-grid typography--p" style={{ marginTop: "50px" }}>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import "../../checkout.css";
 
 export default function FailPage() {
@@ -13,11 +14,12 @@ export default function FailPage() {
 
   return (
     <div id="info" className="box_section" style={{ width: "600px" }}>
-      <img
+      <Image
         className="mx-auto"
-        width="100px"
         src="https://static.toss.im/lotties/error-spot-no-loop-space-apng.png"
         alt="에러 이미지"
+        width={100}
+        height={100}
       />
       <h2>결제를 실패했어요</h2>
 
