@@ -5,20 +5,26 @@ import { useCartApi } from "@/lib/api/cart";
 import ProductQuantitySelector from "@/app/components/cart/ProductQuantitySelector";
 import { useAuthStore } from "@/app/store/authStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePaymentStore } from "@/app/store/usePaymentStore";
 
-interface AddCartProps {
+interface PurchasePanelProps {
   itemId: number;
 }
 
-const AddCart = ({ itemId }: AddCartProps) => {
+const PurchasePanel = ({ itemId }: PurchasePanelProps) => {
   const [quantity, setQuantity] = useState(1);
   const { token } = useAuthStore();
   const router = useRouter();
 
   const { addCartItem } = useCartApi(token || "");
 
-  const handleQuantityChange = async (newQuantity: number) => {
+  const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
+
+    usePaymentStore.getState().setPartialPayment({
+      quantity: newQuantity,
+    });
   };
 
   const addCart = async (itemId: number, quantity: number) => {
@@ -78,7 +84,7 @@ const AddCart = ({ itemId }: AddCartProps) => {
                 />
                 <label
                   htmlFor={`size_option_${index}`}
-                  className="cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 peer-checked:border-[#698b6b] peer-checked:bg-[#698b6b] peer-checked:text-white"
+                  className="peer-checked:border-primary-green peer-checked:bg-primary-green cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 peer-checked:text-white"
                 >
                   {size}
                 </label>
@@ -89,13 +95,21 @@ const AddCart = ({ itemId }: AddCartProps) => {
       </div>
 
       <button
-        className="focus:ring-opacity-50 w-full max-w-sm cursor-pointer rounded-xl bg-[#698b6b] p-4 text-center text-lg font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#5a7a5c] focus:ring-2 focus:ring-[#698b6b] focus:outline-none"
+        className="focus:ring-opacity-50 bg-primary-green focus:ring-primary-green w-full max-w-sm cursor-pointer rounded-xl p-4 text-center text-lg font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#5a7a5c] focus:ring-2 focus:outline-none"
         onClick={() => addCart(itemId, quantity)}
       >
         장바구니에 담기
       </button>
+      {token && (
+        <Link
+          href="/checkout"
+          className="focus:ring-opacity-50 bg-primary-green focus:ring-primary-green w-full max-w-sm cursor-pointer rounded-xl p-4 text-center text-lg font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#5a7a5c] focus:ring-2 focus:outline-none"
+        >
+          결제하기
+        </Link>
+      )}
     </div>
   );
 };
 
-export default AddCart;
+export default PurchasePanel;

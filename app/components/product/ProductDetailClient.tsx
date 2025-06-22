@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
-import AddCart from "@/app/components/product/AddCart";
+import { usePaymentStore } from "@/app/store/usePaymentStore";
+import PurchasePanel from "@/app/components/product/PurchasePanel";
 import SpecTable from "@/app/components/product/SpecTable";
 import { CategoryProduct, productSpec } from "@/types/products";
 
@@ -12,6 +14,13 @@ interface DetailPageProps {
 
 const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
   const { id, name, description, price, image } = product;
+
+  useEffect(() => {
+    usePaymentStore.getState().setPartialPayment({
+      name,
+      price,
+    });
+  }, [name, price]);
 
   return (
     <div className="mx-auto mt-20 px-4 py-8 md:mt-[100px]">
@@ -48,7 +57,7 @@ const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
               </div>
             </div>
 
-            <AddCart itemId={id} />
+            <PurchasePanel itemId={id} />
           </div>
         </div>
       </div>
