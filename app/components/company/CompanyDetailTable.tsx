@@ -6,7 +6,7 @@ async function getCompanyDetail() {
   return await response.json();
 }
 
-export default async function CompanyDetailTable() {
+export default async function DetailTable() {
   const companyDetail: CompanyDetail = await getCompanyDetail();
   const {
     companyName,

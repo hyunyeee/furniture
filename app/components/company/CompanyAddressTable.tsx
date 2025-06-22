@@ -1,17 +1,17 @@
 import { CompanyAddress } from "@/types/company";
 
 async function getCompanyAddress() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+  const apiUrl = process.env.API_URL as string;
   const response = await fetch(`${apiUrl}/address/1`);
   return await response.json();
 }
 
-export default async function CompanyDetailTable() {
+export default async function CompanyAddressTable() {
   const companyAddress: CompanyAddress = await getCompanyAddress();
   const { address, phone, fax, email, subway, bus, walk, car } = companyAddress;
 
   return (
-    <div className="p-20">
+    <div className="h-full p-20">
       <h2 className="mb-20 text-center text-3xl font-semibold">오시는길</h2>
 
       <table className="w-full table-auto border-collapse text-left text-sm">

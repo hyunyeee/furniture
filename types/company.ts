@@ -31,3 +31,10 @@ export interface CompanyAddress {
   walk: string;
   car: string;
 }
+
+export interface Certificate {
+  id: number;
+  imageUrl: string;
+  tag: string;
+  description: string;
+}
