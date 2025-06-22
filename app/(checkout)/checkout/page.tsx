@@ -7,6 +7,8 @@ import {
 } from "@tosspayments/tosspayments-sdk";
 import { useEffect, useState } from "react";
 import "../../checkout.css";
+import { usePaymentStore } from "@/app/store/usePaymentStore";
+import useMemberInfoStore from "@/app/store/memberInfoStore";
 
 // TODO: clientKey는 개발자센터의 결제위젯 연동 키 > 클라이언트 키로 바꾸세요.
 // TODO: 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요. 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
@@ -15,9 +17,12 @@ const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
 const customerKey = generateRandomString();
 
 export default function CheckoutPage() {
+  const { name, quantity, total } = usePaymentStore((state) => state.payment);
+  const { memberNickName } = useMemberInfoStore();
+
   const [amount, setAmount] = useState({
     currency: "KRW",
-    value: 200_000,
+    value: total || 0,
   });
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
@@ -138,11 +143,11 @@ export default function CheckoutPage() {
               // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
               await widgets.requestPayment({
                 orderId: generateRandomString(),
-                orderName: "토스 티셔츠 외 2건",
+                orderName: `${name}, 수량: ${quantity}`,
                 successUrl: window.location.origin + "/success",
                 failUrl: window.location.origin + "/fail",
                 customerEmail: "customer123@gmail.com",
-                customerName: "김토스",
+                customerName: memberNickName,
                 customerMobilePhone: "01012341234",
               });
             } catch (error) {

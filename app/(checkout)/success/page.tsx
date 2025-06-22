@@ -13,10 +13,6 @@ export default function SuccessPage() {
   const amount = searchParams.get("amount");
   const paymentKey = searchParams.get("paymentKey");
 
-  if (!orderId || !amount || !paymentKey) {
-    return <div>로딩 중...</div>;
-  }
-
   const [responseData, setResponseData] = useState(null);
 
   useEffect(() => {
@@ -53,6 +49,10 @@ export default function SuccessPage() {
         router.push(`/fail?code=${error.code}&message=${error.message}`);
       });
   }, [searchParams]);
+
+  if (!orderId || !amount || !paymentKey) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <>
