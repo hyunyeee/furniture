@@ -49,7 +49,7 @@ export default function CheckoutPage() {
     }
 
     fetchPaymentWidgets();
-  }, []);
+  }, [clientKey, customerKey]);
 
   useEffect(() => {
     async function renderPaymentWidgets() {
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
     }
 
     renderPaymentWidgets();
-  }, [widgets, amount]);
+  }, [widgets]);
 
   const updateAmount = async (amount: { currency: string; value: number }) => {
     setAmount(amount);
