@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { usePaymentStore } from "@/app/store/usePaymentStore";
 import "../../checkout.css";
 
 export default function SuccessPage() {
@@ -15,6 +16,10 @@ export default function SuccessPage() {
   const paymentKey = searchParams.get("paymentKey");
 
   const [responseData, setResponseData] = useState(null);
+
+  useEffect(() => {
+    usePaymentStore.getState().resetPayment();
+  }, []);
 
   useEffect(() => {
     async function confirm() {

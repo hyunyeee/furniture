@@ -16,6 +16,10 @@ const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
   const { id, name, description, price, image } = product;
 
   useEffect(() => {
+    usePaymentStore.getState().resetPayment();
+  }, []);
+
+  useEffect(() => {
     usePaymentStore.getState().setPartialPayment({
       name,
       price,
