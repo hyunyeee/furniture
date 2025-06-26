@@ -8,6 +8,8 @@ import { useAuthStore } from "@/app/store/authStore";
 import QuantitySelector from "@/app/components/cart/QuantitySelector";
 import RemoveButton from "@/app/components/cart/RemoveButton";
 import { CartProduct } from "@/types/products";
+import Link from "next/link";
+import { usePaymentStore } from "@/app/store/usePaymentStore";
 
 const Cart = () => {
   const { token } = useAuthStore();
@@ -18,6 +20,14 @@ const Cart = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { getCartList, deleteCartItem } = useCartApi(token || "");
+
+  const orderTotal = cartList?.reduce((acc, item) => acc + item.totalPrice, 0);
+  const totalQuantity = cartList.reduce((acc, item) => acc + item.quantity, 0);
+  const representativeName = cartList[0]?.productName || "";
+  const name =
+    cartList.length > 1
+      ? `${representativeName} 외 ${cartList.length - 1}개`
+      : representativeName;
 
   useEffect(() => {
     if (!isHydrated || !token) {
@@ -44,6 +54,16 @@ const Cart = () => {
 
     fetchCartList();
   }, [isHydrated, token]);
+
+  useEffect(() => {
+    if (!isHydrated || loading || !cartList.length) return;
+
+    usePaymentStore.getState().setPartialPayment({
+      name,
+      quantity: totalQuantity,
+      total: orderTotal,
+    });
+  }, [cartList, isHydrated, loading, orderTotal]);
 
   const handleQuantityChange = async (
     cartItemId: number,
@@ -77,8 +97,6 @@ const Cart = () => {
       }
     }
   };
-
-  const orderTotal = cartList?.reduce((acc, item) => acc + item.totalPrice, 0);
 
   if (!isHydrated || loading || error) {
     let message = "로딩 중...";
@@ -158,9 +176,9 @@ const Cart = () => {
           )}
         </div>
 
-        <div className="lg:col-span-4">
-          <div className="rounded-md bg-white p-6 shadow-md">
-            <div className="flex justify-between pt-4 text-xl font-bold text-gray-900">
+        <div className="w-full flex-shrink-0 lg:w-80">
+          <div className="flex flex-col space-y-4 rounded-md bg-white p-6 shadow-md">
+            <div className="flex justify-between text-xl font-bold text-gray-900">
               <span>최종 결제 금액</span>
               <span>
                 {orderTotal?.toLocaleString("ko-KR", {
@@ -170,9 +188,13 @@ const Cart = () => {
                 })}
               </span>
             </div>
-            <button className="focus:ring-opacity-50 mt-6 w-full rounded-md bg-blue-600 py-3 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
+            <Link
+              href="/checkout"
+              className="bg-primary-green focus:ring-primary-green focus:ring-opacity-50 w-full rounded-md p-4 text-center text-lg font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#5a7a5c] focus:ring-2 focus:outline-none"
+            >
               결제하기
-            </button>
+            </Link>
           </div>
         </div>
       </div>
