@@ -118,15 +118,15 @@ const Cart = () => {
         장바구니
       </h1>
 
-      <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="flex-1">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <div className="lg:col-span-8">
           {cartList?.length === 0 ? (
             <div className="flex h-22 items-center justify-center rounded-md bg-gray-400 text-lg text-white shadow-md">
               장바구니에 상품이 없습니다.
             </div>
           ) : (
             <ul className="space-y-4">
-              {cartList.map((item) => (
+              {cartList?.map((item) => (
                 <li
                   key={item.cartItemId}
                   className="flex items-center rounded-md border border-gray-200 bg-white p-2 shadow-sm"
