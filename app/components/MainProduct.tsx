@@ -4,7 +4,7 @@ import { mainProducts } from "@/app/constants/mainProducts";
 
 export default function MainProduct() {
   return (
-    <div className="mx-auto mt-[150px] flex w-full flex-wrap justify-center gap-6">
+    <div className="mx-auto my-[100px] flex w-full flex-wrap justify-center gap-6">
       {mainProducts.map((product, index) => (
         <div
           key={index}
