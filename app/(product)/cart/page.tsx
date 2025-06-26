@@ -43,7 +43,7 @@ const Cart = () => {
     };
 
     fetchCartList();
-  }, [getCartList, isHydrated, token]);
+  }, [isHydrated, token]);
 
   const handleQuantityChange = async (
     cartItemId: number,
