@@ -14,13 +14,18 @@ interface DetailPageProps {
 
 const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
   const { id, name, description, price, image } = product;
+  const { quantity } = usePaymentStore((state) => state.payment);
+
+  useEffect(() => {
+    usePaymentStore.getState().resetPayment();
+  }, []);
 
   useEffect(() => {
     usePaymentStore.getState().setPartialPayment({
       name,
-      price,
+      total: price * quantity,
     });
-  }, [name, price]);
+  }, [name, price, quantity]);
 
   return (
     <div className="mx-auto mt-20 px-4 py-8 md:mt-[100px]">
