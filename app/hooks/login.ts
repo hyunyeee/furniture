@@ -64,6 +64,7 @@ const useLogin = () => {
       }
       setLoading(false);
       setError(message);
+      alert(message);
       throw new Error(message);
     }
   };
