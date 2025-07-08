@@ -29,11 +29,13 @@ const Header = () => {
         >
           <div className="flex cursor-pointer items-start justify-between gap-6">
             {navItems.map((item) => (
-              <div key={item.label}>
-                <div className="w-[120px] rounded-xl px-4 py-2 text-center font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-gray-100">
-                  {item.label}
-                </div>
-              </div>
+              <Link
+                key={item.label}
+                href={item.children[0].href}
+                className="block w-[120px] rounded-xl px-4 py-2 text-center font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-gray-100"
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
 

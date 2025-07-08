@@ -1,15 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useCartApi } from "@/lib/api/cart";
 import { useHydrated } from "@/app/hooks/useHydrated";
 import { useAuthStore } from "@/app/store/authStore";
 import QuantitySelector from "@/app/components/cart/QuantitySelector";
 import RemoveButton from "@/app/components/cart/RemoveButton";
-import { CartProduct } from "@/types/products";
-import Link from "next/link";
 import { usePaymentStore } from "@/app/store/usePaymentStore";
+import { CartProduct } from "@/types/products";
 
 const Cart = () => {
   const { token } = useAuthStore();
@@ -114,9 +114,7 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto mt-14 max-w-7xl p-6">
-      <h1 className="mb-8 text-2xl font-semibold text-gray-800 md:text-2xl">
-        장바구니
-      </h1>
+      <h1 className="mb-8 text-2xl font-semibold text-gray-800">장바구니</h1>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="lg:col-span-8">
@@ -126,7 +124,7 @@ const Cart = () => {
             </div>
           ) : (
             <ul className="space-y-4">
-              {cartList?.map((item) => (
+              {cartList.map((item) => (
                 <li
                   key={item.cartItemId}
                   className="flex items-center rounded-md border border-gray-200 bg-white p-2 shadow-sm"
@@ -176,7 +174,7 @@ const Cart = () => {
           )}
         </div>
 
-        <div className="w-full flex-shrink-0 lg:w-80">
+        <div className="lg:col-span-4">
           <div className="flex flex-col space-y-4 rounded-md bg-white p-6 shadow-md">
             <div className="flex justify-between text-xl font-bold text-gray-900">
               <span>최종 결제 금액</span>

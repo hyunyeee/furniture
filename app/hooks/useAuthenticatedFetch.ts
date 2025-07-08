@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/app/store/authStore";
 import useMemberInfoStore from "@/app/store/memberInfoStore";
-import { useRouter } from "next/navigation";
 
 export const useAuthenticatedFetch = (token: string) => {
   const { clearToken } = useAuthStore();
