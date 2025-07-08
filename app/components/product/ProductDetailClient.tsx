@@ -6,6 +6,7 @@ import { usePaymentStore } from "@/app/store/usePaymentStore";
 import PurchasePanel from "@/app/components/product/PurchasePanel";
 import SpecTable from "@/app/components/product/SpecTable";
 import { CategoryProduct, productSpec } from "@/types/products";
+import { tagTextColorMap } from "@/app/constants/tagTextColorMap";
 
 interface DetailPageProps {
   product: CategoryProduct;
@@ -13,7 +14,7 @@ interface DetailPageProps {
 }
 
 const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
-  const { id, name, description, price, image } = product;
+  const { id, name, description, price, tagName, image } = product;
   const { quantity } = usePaymentStore((state) => state.payment);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
 
   return (
     <div className="mx-auto mt-20 px-4 py-8 md:mt-[100px]">
-      <div className="flex flex-col items-center justify-center lg:flex-row lg:items-center lg:gap-20">
+      <div className="flex flex-col items-center justify-center gap-20 lg:flex-row lg:items-center">
         <div className="flex flex-col">
           <div className="relative my-auto h-[300px] w-full max-w-[400px] flex-shrink-0 overflow-hidden rounded-lg md:h-[400px] md:w-[400px]">
             {image ? (
@@ -52,9 +53,20 @@ const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
           <div className="p-3 lg:flex-grow">
             <div className="flex">
               <div className="flex-grow whitespace-nowrap">
-                <h1 className="mb-2 pt-6 text-3xl font-bold text-gray-800 md:text-2xl">
-                  {name}
-                </h1>
+                <div className="flex items-start justify-between">
+                  <h1 className="mb-2 text-3xl font-bold text-gray-800 md:text-2xl">
+                    {name}
+                  </h1>
+                  <span
+                    className="inline-block shrink-0 rounded-full px-3 py-1 text-xs font-medium text-white"
+                    style={{
+                      backgroundColor: tagTextColorMap[tagName] ?? "#ccc",
+                    }}
+                  >
+                    {tagName}
+                  </span>
+                </div>
+
                 <p className="mb-4 text-lg text-gray-600">{description}</p>
                 <p className="mb-6 text-xl font-extrabold text-green-700">
                   {price.toLocaleString()}원

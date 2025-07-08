@@ -53,17 +53,20 @@ export default function ProductList({ initialCategoryId }: ProductListProps) {
 
   return (
     <div className="flex flex-wrap justify-center gap-4">
-      {products.map(({ id, name, description, price, categoryName, image }) => (
-        <Product
-          key={id}
-          id={id}
-          name={name}
-          description={description}
-          price={price}
-          categoryName={categoryName}
-          image={image}
-        />
-      ))}
+      {products.map(
+        ({ id, name, description, price, categoryName, tagName, image }) => (
+          <Product
+            key={id}
+            id={id}
+            name={name}
+            description={description}
+            price={price}
+            categoryName={categoryName}
+            tagName={tagName}
+            image={image}
+          />
+        ),
+      )}
     </div>
   );
 }
