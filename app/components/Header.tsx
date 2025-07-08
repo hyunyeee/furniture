@@ -11,7 +11,7 @@ const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="fixed top-0 left-0 z-10 w-full bg-white">
+    <div className="fixed top-0 left-0 z-10 w-full bg-white/70">
       <div className="relative flex items-start justify-between px-10 py-4">
         <Link href="/">
           <Image
