@@ -74,7 +74,7 @@ const ProductDetailClient = ({ product, productSpec }: DetailPageProps) => {
               </div>
             </div>
 
-            <PurchasePanel itemId={id} />
+            <PurchasePanel itemId={id} productSpec={productSpec} />
           </div>
         </div>
       </div>

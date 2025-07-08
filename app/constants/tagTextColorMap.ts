@@ -1,5 +1,5 @@
 export const tagTextColorMap: { [key: string]: string } = {
-  "S Series": "#87ee8d",
+  "S Series": "#7ece83",
   "P Series": "#9ed1ff",
   "DM Series": "#fdd9a0",
   "DMC Series": "#f4bfbf",
