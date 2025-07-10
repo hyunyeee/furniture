@@ -1,14 +1,16 @@
 import { CategoryProduct } from "@/types/products";
 import Link from "next/link";
 import Image from "next/image";
+import { tagTextColorMap } from "@/app/constants/tagTextColorMap";
 
 const Product = ({
   id,
   name,
   description,
   price,
-  categoryName,
+  // categoryName,
   image,
+  tagName,
 }: CategoryProduct) => {
   return (
     <Link
@@ -22,16 +24,24 @@ const Product = ({
           이미지
         </div>
       )}
+      <div className="mt-1 w-full text-left">
+        <div className="flex justify-between">
+          <h3 className="truncate text-base font-semibold text-gray-800">
+            {name}
+          </h3>
+          <span
+            className="rounded-full px-3 py-1 text-xs font-medium text-white"
+            style={{ backgroundColor: tagTextColorMap[tagName] ?? "#ccc" }}
+          >
+            {tagName}
+          </span>
+        </div>
 
-      <div className="flex items-center justify-between">
-        <p className="font-semibold">{name}</p>
-        <p className="bg-primary-green ml-2 inline rounded-md px-2 py-1 text-xs text-white">
-          {categoryName}
+        <p className="mt-1 line-clamp-2 text-sm text-gray-600">{description}</p>
+        <p className="mt-2 text-lg font-bold text-gray-900">
+          {price.toLocaleString()}원
         </p>
       </div>
-
-      <p>{description}</p>
-      <p className="font-semibold">{price.toLocaleString()}</p>
     </Link>
   );
 };

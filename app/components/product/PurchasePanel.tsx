@@ -7,12 +7,14 @@ import { useAuthStore } from "@/app/store/authStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePaymentStore } from "@/app/store/usePaymentStore";
+import { productSpec } from "@/types/products";
 
 interface PurchasePanelProps {
   itemId: number;
+  productSpec: productSpec[];
 }
 
-const PurchasePanel = ({ itemId }: PurchasePanelProps) => {
+const PurchasePanel = ({ itemId, productSpec }: PurchasePanelProps) => {
   const [quantity, setQuantity] = useState(1);
   const { token } = useAuthStore();
   const router = useRouter();
@@ -71,26 +73,24 @@ const PurchasePanel = ({ itemId }: PurchasePanelProps) => {
 
       <div className="w-full max-w-sm">
         <p className="mb-2 text-sm font-medium text-gray-700">사이즈 선택</p>
-        <div className="flex flex-wrap justify-start gap-3">
-          {["사이즈 1", "사이즈 2", "사이즈 3", "사이즈 4"].map(
-            (size, index) => (
-              <div key={index}>
-                <input
-                  type="radio"
-                  id={`size_option_${index}`}
-                  name="size_option"
-                  value={size}
-                  className="peer hidden"
-                />
-                <label
-                  htmlFor={`size_option_${index}`}
-                  className="peer-checked:border-primary-green peer-checked:bg-primary-green cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 peer-checked:text-white"
-                >
-                  {size}
-                </label>
-              </div>
-            ),
-          )}
+        <div className="flex flex-wrap justify-start gap-4">
+          {productSpec?.map(({ model }) => (
+            <div key={model}>
+              <input
+                type="radio"
+                id={`size_option_${model}`}
+                name="size_option"
+                value={model}
+                className="peer hidden"
+              />
+              <label
+                htmlFor={`size_option_${model}`}
+                className="peer-checked:border-primary-green peer-checked:bg-primary-green cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 peer-checked:text-white"
+              >
+                {model}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
 

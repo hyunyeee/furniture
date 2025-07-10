@@ -1,14 +1,17 @@
 "use client";
 
-import { Category } from "@/types/products";
 import useCategoryStore from "@/app/store/useCategoryStore";
 
-const CategoryButton = ({ id, name }: Category) => {
+interface CategoryButtonProps {
+  id: number;
+  name: string;
+}
+
+const CategoryButton = ({ id, name }: CategoryButtonProps) => {
   const { categoryId, setCategoryId } = useCategoryStore();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setCategoryId(id);
-    console.log(id);
   };
 
   return (

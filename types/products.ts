@@ -3,12 +3,18 @@ export interface Category {
   name: string;
 }
 
+export interface CategoryTag {
+  tagNames: string[];
+  categoryName: string;
+}
+
 export interface CategoryProduct {
   id: number;
   name: string;
   description: string;
   price: number;
   categoryName: string;
+  tagName: string;
   image: string | null;
 }
 
