@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PortfolioPage() {
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-gray-50 px-4 text-center">
@@ -11,12 +13,12 @@ export default function PortfolioPage() {
           빠른 시일 내에 오픈 예정입니다. 이용에 불편을 드려 죄송합니다.
         </p>
         <div className="mt-6">
-          <a
+          <Link
             href="/"
             className="bg-primary-green hover:bg-dark-green inline-block rounded-md px-6 py-2 text-white transition-colors"
           >
             메인으로 돌아가기
-          </a>
+          </Link>
         </div>
       </div>
     </div>
