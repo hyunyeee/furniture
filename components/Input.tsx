@@ -1,4 +1,4 @@
-import { InputField } from "@/app/(auth)/field";
+import { InputField } from "@/types/field";
 
 export default function Input({
   autoFocus,

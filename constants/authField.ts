@@ -1,10 +1,4 @@
-export type InputField = {
-  name: string;
-  type: "text" | "number" | "email" | "password" | "file";
-  placeholder: string;
-  autoFocus?: boolean;
-  button?: string;
-};
+import { InputField } from "@/types/field";
 
 export const loginFields: InputField[] = [
   { name: "memberEmail", type: "email", placeholder: "이메일" },

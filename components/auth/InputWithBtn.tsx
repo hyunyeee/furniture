@@ -5,11 +5,12 @@ import { useState } from "react";
 import useSendAuthCode from "@/hooks/sendAuthCode";
 import useVerifyAuthCode from "@/hooks/verifyAuthCode";
 
-import { AUTH_SEND, AUTH_VERIFY, InputField } from "@/app/(auth)/field";
+import { AUTH_SEND, AUTH_VERIFY } from "@/constants/authField";
 import {
   getEmailFromLocalStorage,
   saveEmailToLocalStorage,
 } from "@/utils/storage";
+import { InputField } from "@/types/field";
 
 const cleanString = (input: string) =>
   input

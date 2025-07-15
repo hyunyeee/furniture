@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-import {
-  corporateSignupFields,
-  personalSignupFields,
-} from "@/app/(auth)/field";
 import FormCard from "@/components/auth/FormCard";
 import { ToggleSwitch } from "@/components/auth/ToggleSwitch";
 import InputWithBtn from "@/components/auth/InputWithBtn";
-import Input from "@/components/auth/Input";
+import Input from "@/components/Input";
+import {
+  corporateSignupFields,
+  personalSignupFields,
+} from "@/constants/authField";
 
 export default function Signup() {
   const [isCorporation, setIsCorporation] = useState(false);
