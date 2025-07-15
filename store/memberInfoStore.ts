@@ -6,6 +6,7 @@ interface MemberInfoState {
   checkCorporation: boolean;
   setMemberNickName: (nickname: string) => void;
   setCheckCorporation: (checked: boolean) => void;
+  clearMemberInfo: () => void;
 }
 
 const useMemberInfoStore = create<MemberInfoState>()(
@@ -17,7 +18,13 @@ const useMemberInfoStore = create<MemberInfoState>()(
         set({ memberNickName: nickname }),
       setCheckCorporation: (checked: boolean) =>
         set({ checkCorporation: checked }),
+      clearMemberInfo: () =>
+        set({
+          memberNickName: "",
+          checkCorporation: false,
+        }),
     }),
+
     {
       name: "member-info",
       storage: createJSONStorage(() => sessionStorage),
