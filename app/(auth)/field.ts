@@ -32,12 +32,12 @@ export const personalSignupFields: InputField[] = [
 
 export const corporateSignupFields: InputField[] = [
   { name: "name", type: "text", placeholder: "담당자명" },
-  { name: "email", type: "email", placeholder: "이메일", button: "인증" },
+  { name: "email", type: "email", placeholder: "이메일", button: AUTH_SEND },
   {
     name: "verify",
     type: "text",
     placeholder: "인증번호",
-    button: "확인",
+    button: AUTH_VERIFY,
   },
   { name: "password", type: "password", placeholder: "비밀번호" },
   { name: "nickname", type: "text", placeholder: "대리점명" },
