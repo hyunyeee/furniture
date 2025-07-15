@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 
-import useSendAuthCode from "@/app/hooks/sendAuthCode";
-import useVerifyAuthCode from "@/app/hooks/verifyAuthCode";
+import useSendAuthCode from "@/hooks/sendAuthCode";
+import useVerifyAuthCode from "@/hooks/verifyAuthCode";
+
+import { AUTH_SEND, AUTH_VERIFY, InputField } from "@/app/(auth)/field";
 import {
   getEmailFromLocalStorage,
   saveEmailToLocalStorage,
-} from "@/app/utils/storage";
-import { AUTH_SEND, AUTH_VERIFY, InputField } from "@/app/(auth)/field";
+} from "@/utils/storage";
 
 const cleanString = (input: string) =>
   input

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { mainProducts } from "@/app/constants/mainProducts";
+import { mainProducts } from "@/constants/mainProducts";
 
 export default function MainProduct() {
   return (

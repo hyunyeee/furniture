@@ -1,6 +1,6 @@
 "use client";
 
-import useCategoryStore from "@/app/store/useCategoryStore";
+import useCategoryStore from "@/store/useCategoryStore";
 
 interface CategoryButtonProps {
   id: number;

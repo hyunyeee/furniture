@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { getCategoryTags } from "@/lib/api/product";
-import CategoryButton from "@/app/components/product/CategoryButton";
-import TagButton from "@/app/components/product/TagButton";
-import useCategoryStore from "@/app/store/useCategoryStore";
+
 import { Category } from "@/types/products";
+import useCategoryStore from "@/store/useCategoryStore";
+import CategoryButton from "@/components/product/CategoryButton";
+import TagButton from "@/components/product/TagButton";
 
 interface CategoryTagSelectorProps {
   categories: Category[];

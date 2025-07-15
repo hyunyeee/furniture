@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { usePaymentStore } from "@/app/store/usePaymentStore";
-import PurchasePanel from "@/app/components/product/PurchasePanel";
-import SpecTable from "@/app/components/product/SpecTable";
+import { usePaymentStore } from "@/store/usePaymentStore";
+import PurchasePanel from "@/components/product/PurchasePanel";
+import SpecTable from "@/components/product/SpecTable";
 import { CategoryProduct, productSpec } from "@/types/products";
-import { tagTextColorMap } from "@/app/constants/tagTextColorMap";
+import { tagTextColorMap } from "@/constants/tagTextColorMap";
 
 interface DetailPageProps {
   product: CategoryProduct;
