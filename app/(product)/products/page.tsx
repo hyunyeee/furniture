@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { getCategories, getCategoryProductsById } from "@/lib/api/product";
-import ProductList from "@/app/components/product/ProductList";
-import CategoryTagSelector from "@/app/components/product/CategoryTagSelector";
-import useCategoryStore from "@/app/store/useCategoryStore";
+
 import { Category, CategoryProduct } from "@/types/products";
+import useCategoryStore from "@/store/useCategoryStore";
+import CategoryTagSelector from "@/components/product/CategoryTagSelector";
+import ProductList from "@/components/product/ProductList";
 
 const Products = () => {
   const [categories, setCategories] = useState<Category[]>([]);

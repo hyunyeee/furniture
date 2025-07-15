@@ -1,6 +1,5 @@
 import { Certificate } from "@/types/company";
-
-import CertificatesCard from "@/app/components/company/CertificatesCard";
+import CertificatesCard from "@/components/company/CertificatesCard";
 
 async function getCertificate(): Promise<Certificate[]> {
   const apiUrl = process.env.API_URL as string;

@@ -1,5 +1,5 @@
-import MainProduct from "@/app/components/main/MainProduct";
-import MainImage from "@/app/components/main/MainImage";
+import MainImage from "@/components/main/MainImage";
+import MainProduct from "@/components/main/MainProduct";
 
 export default async function Home() {
   return (

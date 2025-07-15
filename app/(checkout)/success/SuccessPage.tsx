@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { usePaymentStore } from "@/app/store/usePaymentStore";
+import { usePaymentStore } from "@/store/usePaymentStore";
 import "../../checkout.css";
 
 export default function SuccessPage() {

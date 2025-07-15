@@ -1,5 +1,5 @@
 import Maintenance from "@/components/Maintenance";
 
-export default function PortfolioPage() {
+export default function NoticePage() {
   return <Maintenance />;
 }

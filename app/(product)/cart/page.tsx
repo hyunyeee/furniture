@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartApi } from "@/lib/api/cart";
-import { useHydrated } from "@/app/hooks/useHydrated";
-import { useAuthStore } from "@/app/store/authStore";
-import QuantitySelector from "@/app/components/cart/QuantitySelector";
-import RemoveButton from "@/app/components/cart/RemoveButton";
-import { usePaymentStore } from "@/app/store/usePaymentStore";
+import { useHydrated } from "@/hooks/useHydrated";
+import { usePaymentStore } from "@/store/usePaymentStore";
+import { useAuthStore } from "@/store/authStore";
+import QuantitySelector from "@/components/cart/QuantitySelector";
+import RemoveButton from "@/components/cart/RemoveButton";
 import { CartProduct } from "@/types/products";
 
 const Cart = () => {

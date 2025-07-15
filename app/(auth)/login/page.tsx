@@ -1,9 +1,9 @@
 "use client";
 
-import useLogin, { LoginData } from "@/app/hooks/login";
-import FormCard from "@/app/components/auth/FormCard";
-import Input from "@/app/components/auth/Input";
-import { loginFields } from "@/app/(auth)/field";
+import useLogin, { LoginData } from "@/hooks/login";
+import FormCard from "@/components/auth/FormCard";
+import Input from "@/components/Input";
+import { loginFields } from "@/constants/authField";
 
 export default function Login() {
   const { login } = useLogin();
