@@ -1,7 +1,7 @@
 "use client";
 
-import Product from "@/app/components/product/Product";
 import { CategoryProduct } from "@/types/products";
+import Product from "@/components/product/Product";
 
 interface ProductListProps {
   products: CategoryProduct[];

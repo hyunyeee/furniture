@@ -1,5 +1,5 @@
 import { getProductDetail, getProductSpec } from "@/lib/api/product";
-import ProductDetailClient from "@/app/components/product/ProductDetailClient";
+import ProductDetailClient from "@/components/product/ProductDetailClient";
 
 interface Props {
   params: Promise<{ id: string }>;

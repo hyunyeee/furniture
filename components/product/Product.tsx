@@ -1,7 +1,7 @@
 import { CategoryProduct } from "@/types/products";
 import Link from "next/link";
 import Image from "next/image";
-import { tagTextColorMap } from "@/app/constants/tagTextColorMap";
+import { tagTextColorMap } from "@/constants/tagTextColorMap";
 
 const Product = ({
   id,

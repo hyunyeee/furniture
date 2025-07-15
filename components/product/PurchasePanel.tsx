@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { useCartApi } from "@/lib/api/cart";
-import ProductQuantitySelector from "@/app/components/cart/ProductQuantitySelector";
-import { useAuthStore } from "@/app/store/authStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { usePaymentStore } from "@/app/store/usePaymentStore";
 import { productSpec } from "@/types/products";
+import { useAuthStore } from "@/store/authStore";
+import { usePaymentStore } from "@/store/usePaymentStore";
+import ProductQuantitySelector from "@/components/cart/ProductQuantitySelector";
 
 interface PurchasePanelProps {
   itemId: number;

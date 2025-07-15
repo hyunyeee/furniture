@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { navItems } from "@/app/constants/navItems";
-import useMemberInfoStore from "@/app/store/memberInfoStore";
+import useMemberInfoStore from "@/store/memberInfoStore";
+import { navItems } from "@/constants/navItems";
 
 const Header = () => {
   const { memberNickName } = useMemberInfoStore();

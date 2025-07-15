@@ -7,7 +7,7 @@ export interface Histories {
 }
 
 export interface CompanyImage {
-  imageUrl: number;
+  imageUrl: string;
   description: string;
 }
 

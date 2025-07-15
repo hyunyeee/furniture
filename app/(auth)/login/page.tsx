@@ -1,8 +1,8 @@
 "use client";
 
-import useLogin, { LoginData } from "@/app/hooks/login";
-import FormCard from "@/app/components/auth/FormCard";
-import Input from "@/app/components/auth/Input";
+import useLogin, { LoginData } from "@/hooks/login";
+import FormCard from "@/components/auth/FormCard";
+import Input from "@/components/auth/Input";
 import { loginFields } from "@/app/(auth)/field";
 
 export default function Login() {

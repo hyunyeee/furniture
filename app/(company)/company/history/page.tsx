@@ -1,5 +1,5 @@
-import HistoryCard from "@/app/components/company/HistoryCard";
 import { Histories } from "@/types/company";
+import HistoryCard from "@/components/company/HistoryCard";
 
 async function getHistories(): Promise<Histories[]> {
   const apiUrl = process.env.API_URL as string;

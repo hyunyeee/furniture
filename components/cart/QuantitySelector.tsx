@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCartApi } from "@/lib/api/cart";
-import { useAuthStore } from "@/app/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 
 interface QuantitySelectorProps {
   itemId: number;

@@ -1,6 +1,6 @@
 "use client";
 
-import { tagTextColorMap } from "@/app/constants/tagTextColorMap";
+import { tagTextColorMap } from "@/constants/tagTextColorMap";
 
 interface TagButtonProps {
   name: string;

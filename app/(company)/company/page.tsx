@@ -1,6 +1,6 @@
 import { CompanyImage } from "@/types/company";
-import CompanyDetailTable from "@/app/components/company/CompanyDetailTable";
 import Image from "next/image";
+import DetailTable from "@/components/company/CompanyDetailTable";
 
 async function getCompanyImage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
@@ -12,7 +12,7 @@ export default async function History() {
   const companyImage: CompanyImage = await getCompanyImage();
   const { imageUrl, description } = companyImage;
   return (
-    <div className="mx-auto mt-[100px] max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+    <div className="mx-auto my-[100px] max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
       <h1 className="text-center text-2xl font-bold sm:text-3xl">회사 소개</h1>
 
       <p className="text-md mt-2 text-center leading-loose whitespace-pre-wrap md:text-xl">
@@ -40,7 +40,7 @@ export default async function History() {
       </div>
 
       <div className="mt-20">
-        <CompanyDetailTable />
+        <DetailTable />
       </div>
     </div>
   );
