@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-8 text-sm text-gray-600">
-      <div className="flex max-w-7xl flex-col justify-center gap-4 px-2 sm:flex-row sm:gap-8 sm:px-4">
-        <div className="flex flex-col items-start gap-2">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-4 sm:flex-row sm:gap-12">
+        <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
           <p>
             <strong>상호명</strong> : 대명
           </p>
@@ -17,7 +17,7 @@ export default function Footer() {
             B동
           </p>
         </div>
-        <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
           <p>
             <strong>TEL</strong>: 031)358-4826
           </p>
