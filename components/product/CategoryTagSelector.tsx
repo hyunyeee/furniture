@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getCategoryTags } from "@/lib/api/product";
-
 import { Category } from "@/types/products";
 import useCategoryStore from "@/store/useCategoryStore";
 import CategoryButton from "@/components/product/CategoryButton";
@@ -22,7 +21,6 @@ const CategoryTagSelector = ({
   selectedTags,
 }: CategoryTagSelectorProps) => {
   const { categoryId } = useCategoryStore();
-
   const [tagArr, setTagArr] = useState<string[]>([]);
 
   useEffect(() => {
@@ -36,13 +34,13 @@ const CategoryTagSelector = ({
   }, [categoryId]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-center gap-4">
+    <div className="flex flex-col gap-4 px-2 sm:px-4">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
         {categories.map(({ id, name }) => (
           <CategoryButton key={id} id={id} name={name} />
         ))}
       </div>
-      <div className="flex justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
         <button
           onClick={selectAllProducts}
           className="cursor-pointer rounded-full px-4 py-2 text-xs font-medium transition-opacity duration-300"
