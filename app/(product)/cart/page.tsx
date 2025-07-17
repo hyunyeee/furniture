@@ -1,15 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useCartApi } from "@/lib/api/cart";
-import { useHydrated } from "@/app/hooks/useHydrated";
-import { useAuthStore } from "@/app/store/authStore";
-import QuantitySelector from "@/app/components/cart/QuantitySelector";
-import RemoveButton from "@/app/components/cart/RemoveButton";
-import { CartProduct } from "@/types/products";
+import Image from "next/image";
 import Link from "next/link";
-import { usePaymentStore } from "@/app/store/usePaymentStore";
+import { useCartApi } from "@/lib/api/cart";
+import { useHydrated } from "@/hooks/useHydrated";
+import { usePaymentStore } from "@/store/usePaymentStore";
+import { useAuthStore } from "@/store/authStore";
+import QuantitySelector from "@/components/cart/QuantitySelector";
+import RemoveButton from "@/components/cart/RemoveButton";
+import { CartProduct } from "@/types/products";
 
 const Cart = () => {
   const { token } = useAuthStore();
@@ -30,9 +30,7 @@ const Cart = () => {
       : representativeName;
 
   useEffect(() => {
-    if (!isHydrated || !token) {
-      return;
-    }
+    if (!isHydrated || !token) return;
 
     const fetchCartList = async () => {
       setLoading(true);
@@ -42,11 +40,8 @@ const Cart = () => {
         const data = await getCartList();
         setCartList(data.items);
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("장바구니 정보를 불러오는 데 실패했습니다.");
-        }
+        if (err instanceof Error) setError(err.message);
+        else setError("장바구니 정보를 불러오는 데 실패했습니다.");
       } finally {
         setLoading(false);
       }
@@ -65,10 +60,7 @@ const Cart = () => {
     });
   }, [cartList, isHydrated, loading, orderTotal]);
 
-  const handleQuantityChange = async (
-    cartItemId: number,
-    newQuantity: number,
-  ) => {
+  const handleQuantityChange = (cartItemId: number, newQuantity: number) => {
     const quantityToSet = Math.max(1, newQuantity);
 
     setCartList((prevCartList) =>
@@ -92,9 +84,7 @@ const Cart = () => {
       await deleteCartItem([productId]);
       alert(`장바구니 항목 ID ${productId} 삭제됨`);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        alert("상품 삭제를 실패했습니다.");
-      }
+      if (err instanceof Error) alert("상품 삭제를 실패했습니다.");
     }
   };
 
@@ -113,23 +103,22 @@ const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto mt-14 max-w-7xl p-6">
-      <h1 className="mb-8 text-2xl font-semibold text-gray-800 md:text-2xl">
-        장바구니
-      </h1>
+    <div className="container mx-auto mt-14 max-w-7xl p-4 sm:p-6">
+      <h1 className="mb-8 text-2xl font-semibold text-gray-800">장바구니</h1>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        {/* 상품 리스트 */}
         <div className="lg:col-span-8">
-          {cartList?.length === 0 ? (
+          {cartList.length === 0 ? (
             <div className="flex h-22 items-center justify-center rounded-md bg-gray-400 text-lg text-white shadow-md">
               장바구니에 상품이 없습니다.
             </div>
           ) : (
             <ul className="space-y-4">
-              {cartList?.map((item) => (
+              {cartList.map((item) => (
                 <li
                   key={item.cartItemId}
-                  className="flex items-center rounded-md border border-gray-200 bg-white p-2 shadow-sm"
+                  className="flex flex-col items-center rounded-md border border-gray-200 bg-white p-2 shadow-sm sm:flex-row sm:items-center"
                 >
                   <div className="h-24 w-24 flex-shrink-0 p-2">
                     {item.image ? (
@@ -148,7 +137,7 @@ const Cart = () => {
                     )}
                   </div>
 
-                  <div className="flex-grow p-2">
+                  <div className="flex-grow p-2 text-center sm:text-left">
                     <h2 className="text-lg font-medium text-gray-800">
                       {item.productName}
                     </h2>
@@ -160,23 +149,25 @@ const Cart = () => {
                     </p>
                   </div>
 
-                  <QuantitySelector
-                    itemId={item.cartItemId}
-                    quantity={item.quantity}
-                    onQuantityChange={handleQuantityChange}
-                  />
-
-                  <RemoveButton
-                    productId={item.productId}
-                    onRemoveItem={handleRemoveItem}
-                  />
+                  <div className="flex items-center justify-center gap-3 p-2 sm:justify-start">
+                    <QuantitySelector
+                      itemId={item.cartItemId}
+                      quantity={item.quantity}
+                      onQuantityChange={handleQuantityChange}
+                    />
+                    <RemoveButton
+                      productId={item.productId}
+                      onRemoveItem={handleRemoveItem}
+                    />
+                  </div>
                 </li>
               ))}
             </ul>
           )}
         </div>
 
-        <div className="w-full flex-shrink-0 lg:w-80">
+        {/* 결제 정보 */}
+        <div className="lg:col-span-4">
           <div className="flex flex-col space-y-4 rounded-md bg-white p-6 shadow-md">
             <div className="flex justify-between text-xl font-bold text-gray-900">
               <span>최종 결제 금액</span>

@@ -1,4 +1,9 @@
-import { Category, CategoryProduct, productSpec } from "@/types/products";
+import {
+  Category,
+  CategoryProduct,
+  CategoryTag,
+  productSpec,
+} from "@/types/products";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -7,6 +12,14 @@ export async function getCategories(): Promise<Category[]> {
     cache: "no-store",
   });
   if (!response.ok) throw new Error("카테고리 불러오기 실패");
+  return await response.json();
+}
+
+export async function getCategoryTags(id: number): Promise<CategoryTag> {
+  const response = await fetch(`${apiUrl}/products/tags?categoryId=${id}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error("카테고리 태그 불러오기 실패");
   return await response.json();
 }
 

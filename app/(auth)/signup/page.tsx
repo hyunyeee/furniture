@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import FormCard from "@/app/components/auth/FormCard";
-import { ToggleSwitch } from "@/app/components/auth/ToggleSwitch";
-import Input from "@/app/components/auth/Input";
-import InputWithBtn from "@/app/components/auth/InputWithBtn";
+
+import FormCard from "@/components/auth/FormCard";
+import { ToggleSwitch } from "@/components/auth/ToggleSwitch";
+import InputWithBtn from "@/components/auth/InputWithBtn";
+import Input from "@/components/Input";
 import {
   corporateSignupFields,
   personalSignupFields,
-} from "@/app/(auth)/field";
+} from "@/constants/authField";
 
 export default function Signup() {
   const [isCorporation, setIsCorporation] = useState(false);

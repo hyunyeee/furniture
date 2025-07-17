@@ -1,5 +1,5 @@
-import HistoryCard from "@/app/components/company/HistoryCard";
 import { Histories } from "@/types/company";
+import HistoryCard from "@/components/company/HistoryCard";
 
 async function getHistories(): Promise<Histories[]> {
   const apiUrl = process.env.API_URL as string;
@@ -10,34 +10,27 @@ async function getHistories(): Promise<Histories[]> {
   }
 
   const data = await response.json();
-
-  if (!Array.isArray(data)) {
-    console.error("API 응답이 배열이 아닙니다:", data);
-    return [];
-  }
-
-  return data;
+  return Array.isArray(data) ? data : [];
 }
 
 export default async function History() {
   const histories: Histories[] = await getHistories();
 
   return (
-    <div className="mt-[100px] flex h-screen flex-col justify-between px-20 pb-20">
-      <h1 className="text-center text-3xl font-semibold">연혁</h1>
+    <section className="mx-auto mt-24 max-w-4xl px-6 pb-12">
+      <h1 className="mb-12 text-center text-3xl font-bold text-gray-800">
+        연혁
+      </h1>
+
       {histories.length === 0 ? (
-        <p>연혁 데이터가 없습니다.</p>
+        <p className="text-center text-gray-500">연혁 데이터가 없습니다.</p>
       ) : (
-        histories.map(({ id, title, content, imageUrl1, imageUrl2 }) => (
-          <HistoryCard
-            key={id}
-            title={title}
-            content={content}
-            imageUrl1={imageUrl1}
-            imageUrl2={imageUrl2}
-          />
-        ))
+        <ol className="relative border-s border-gray-200 pl-8">
+          {histories.map((history) => (
+            <HistoryCard key={history.id} {...history} />
+          ))}
+        </ol>
       )}
-    </div>
+    </section>
   );
 }

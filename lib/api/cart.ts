@@ -1,5 +1,5 @@
 import { CartProductListInfo } from "@/types/products";
-import { useAuthenticatedFetch } from "@/app/hooks/useAuthenticatedFetch";
+import { useAuthenticatedFetch } from "@/hooks/useAuthenticatedFetch";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
