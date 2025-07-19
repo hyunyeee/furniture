@@ -7,16 +7,16 @@ export default function Input({
   placeholder,
 }: InputField) {
   return (
-    <div className="flex items-center justify-center gap-4">
-      <label className="w-[74px] text-center text-sm whitespace-nowrap">
+    <div className="flex w-full max-w-[460px] min-w-0 items-center justify-center gap-2">
+      <label className="w-[74px] shrink-0 text-center text-sm whitespace-nowrap">
         {placeholder}
       </label>
       <input
-        autoFocus={autoFocus}
-        className="bg-light-green w-full max-w-[330px] flex-grow-0 appearance-none rounded-xl border-1 border-gray-100 px-4 py-2 whitespace-nowrap [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="bg-light-green min-w-0 flex-grow appearance-none rounded-xl border border-gray-100 px-4 py-2 text-sm"
         name={name}
         type={type}
         placeholder={placeholder}
+        autoFocus={autoFocus}
       />
     </div>
   );

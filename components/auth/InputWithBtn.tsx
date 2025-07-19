@@ -56,13 +56,13 @@ export default function InputWithBtn({
   };
 
   return (
-    <div className="flex items-center justify-center gap-4">
-      <label className="w-[74px] text-center text-sm whitespace-nowrap">
+    <div className="flex w-full max-w-[460px] min-w-0 items-center justify-center gap-2">
+      <label className="w-[74px] shrink-0 text-center text-sm whitespace-nowrap">
         {placeholder}
       </label>
-      <div className="flex w-full max-w-[330px] gap-4">
+      <div className="flex w-full min-w-0 flex-grow gap-2">
         <input
-          className="bg-light-green flex-grow appearance-none rounded-xl border-1 border-gray-100 px-4 py-2 whitespace-nowrap [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="bg-light-green min-w-0 flex-grow appearance-none rounded-xl border border-gray-100 px-4 py-2 text-sm whitespace-nowrap [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           name={name}
           type={type}
           placeholder={placeholder}
@@ -70,7 +70,9 @@ export default function InputWithBtn({
           onChange={(e) => setValue(e.target.value)}
         />
         <button
-          className={`${button ? "block" : "invisible"} bg-primary-green w-[60px] cursor-pointer rounded-xl px-4 py-2 text-white`}
+          className={`${
+            button ? "block" : "invisible"
+          } bg-primary-green w-[60px] shrink-0 rounded-xl px-2 py-2 text-sm text-white`}
           onClick={emailVerification}
         >
           {button}
