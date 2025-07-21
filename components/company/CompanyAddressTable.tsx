@@ -1,10 +1,5 @@
+import { getCompanyAddress } from "@/lib/api/company";
 import { CompanyAddress } from "@/types/company";
-
-async function getCompanyAddress() {
-  const apiUrl = process.env.API_URL as string;
-  const response = await fetch(`${apiUrl}/address/1`);
-  return await response.json();
-}
 
 export default async function CompanyAddressTable() {
   const companyAddress: CompanyAddress = await getCompanyAddress();
