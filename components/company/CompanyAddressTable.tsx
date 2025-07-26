@@ -6,7 +6,7 @@ export default async function CompanyAddressTable() {
   const { address, phone, fax, email, subway, bus, walk, car } = companyAddress;
 
   return (
-    <div className="mx-auto my-[130px] max-w-4xl rounded-lg bg-white p-6 px-4 shadow-md sm:px-6 lg:px-8">
+    <div className="mx-auto my-[80px] max-w-4xl rounded-lg bg-white p-6 px-4 shadow-md sm:px-6 lg:px-8">
       <h2 className="mb-8 text-center text-2xl font-bold">오시는 길</h2>
       <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
         {/* 연락처 테이블 */}

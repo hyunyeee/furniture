@@ -24,13 +24,14 @@ export default function ContactPage() {
   const content = { name: "message", type: "text", placeholder: "문의 내용" };
 
   return (
-    <div className="my-[130px]">
+    <div className="my-[130px] px-4">
       <h1 className="text-center text-2xl font-semibold">문의하기</h1>
+
       <form
-        className="mt-[50px] flex flex-col items-center gap-10"
         onSubmit={handleSubmit}
+        className="mt-[50px] flex flex-col items-center gap-10"
       >
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full max-w-[600px] flex-col gap-4">
           {contactFields.map(({ name, type, placeholder }, index) => (
             <Input
               autoFocus={index === 0}
@@ -40,9 +41,12 @@ export default function ContactPage() {
               placeholder={placeholder}
             />
           ))}
-          <div className="h-[2px] w-[600px] self-center bg-[#ccc]" />
+
+          <div className="h-[2px] w-full bg-[#ccc]" />
+
           <TextArea name={content.name} placeholder={content.placeholder} />
         </div>
+
         <button className="bg-primary-green w-full max-w-[450px] cursor-pointer rounded-xl p-4 text-white">
           제출하기
         </button>
