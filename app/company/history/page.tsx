@@ -1,17 +1,6 @@
 import { Histories } from "@/types/company";
+import { getHistories } from "@/lib/api/company";
 import HistoryCard from "@/components/company/HistoryCard";
-
-async function getHistories(): Promise<Histories[]> {
-  const apiUrl = process.env.API_URL as string;
-  const response = await fetch(`${apiUrl}/company/history`);
-
-  if (!response.ok) {
-    throw new Error(`API 요청 실패: ${response.status}`);
-  }
-
-  const data = await response.json();
-  return Array.isArray(data) ? data : [];
-}
 
 export default async function History() {
   const histories: Histories[] = await getHistories();

@@ -1,23 +1,6 @@
 import { Certificate } from "@/types/company";
+import { getCertificate } from "@/lib/api/company";
 import CertificatesCard from "@/components/company/CertificatesCard";
-
-async function getCertificate(): Promise<Certificate[]> {
-  const apiUrl = process.env.API_URL as string;
-  const response = await fetch(`${apiUrl}/certificates`);
-
-  if (!response.ok) {
-    throw new Error(`API 요청 실패: ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  if (!Array.isArray(data)) {
-    console.error("API 응답이 배열이 아닙니다:", data);
-    return [];
-  }
-
-  return data;
-}
 
 export default async function CertificatePage() {
   const certificates: Certificate[] = await getCertificate();
