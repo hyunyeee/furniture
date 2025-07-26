@@ -1,12 +1,7 @@
 import { CompanyImage } from "@/types/company";
 import Image from "next/image";
+import { getCompanyImage } from "@/lib/api/company";
 import DetailTable from "@/components/company/CompanyDetailTable";
-
-async function getCompanyImage() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
-  const response = await fetch(`${apiUrl}/company/image`);
-  return await response.json();
-}
 
 export default async function History() {
   const companyImage: CompanyImage = await getCompanyImage();
