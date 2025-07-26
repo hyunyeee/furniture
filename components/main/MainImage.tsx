@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const images = [
   "/image/main/00039434.jpg",
@@ -38,7 +39,7 @@ const MainImage = () => {
 
   return (
     <div className="relative h-[360px] min-h-[320px] w-full overflow-hidden sm:h-screen">
-      <img
+      <Image
         src={images[currentIndex]}
         alt={`메인 이미지 ${currentIndex + 1}`}
         className={`h-full w-full object-cover object-center transition-opacity duration-[1500ms] ease-in-out ${
